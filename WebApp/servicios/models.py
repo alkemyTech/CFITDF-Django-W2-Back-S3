@@ -12,3 +12,11 @@ class Cliente(models.Model):
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
     activo = models.BooleanField(default=True)
+
+
+class Empleado(models.Model):
+    nombre = models.CharField(max_length=50)
+    apellido = models.CharField(max_length=50)
+    numero_legajo = models.IntegerField()
+    activo = models.BooleanField(default=True)
+    
