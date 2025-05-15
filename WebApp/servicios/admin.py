@@ -18,3 +18,11 @@ class ClienteAdmin(admin.ModelAdmin):
 class EmpleadoAdmin(admin.ModelAdmin):
     list_display = ['nombre', 'apellido', 'activo']
     search_fields = ['nombre', 'apellido']
+
+
+@admin.register(models.Coordinador)
+class CoordinadorAdmin(admin.ModelAdmin):
+    list_display = ['nombre', 'apellido', 'activo']
+    search_fields = ['nombre', 'apellido']
+
+admin.site.register(models.ReservaServicio)
