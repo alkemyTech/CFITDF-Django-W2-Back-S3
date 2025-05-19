@@ -25,10 +25,4 @@ class CoordinadorAdmin(admin.ModelAdmin):
     list_display = ['nombre', 'apellido', 'activo', 'numero_documento', 'fecha_alta']
     search_fields = ['nombre', 'apellido']
     
-
-@admin.register(models.Coordinador)
-class CoordinadorAdmin(admin.ModelAdmin):
-    list_display = ['nombre', 'apellido', 'activo', 'numero_documento', 'fecha_alta']
-    search_fields = ['nombre', 'apellido']    
-
 admin.site.register(models.ReservaServicio)
