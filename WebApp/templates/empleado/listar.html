@@ -1,0 +1,37 @@
+<h1>Listado de Empleados</h1>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Número de legajo</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for empleado in listado_empleado %}
+        <tr>
+            <td>{{ empleado.id }}</td>
+            <td>{{ empleado.nombre }}</td>
+            <td>{{ empleado.apellido }}</td>
+            <td>$ {{ empleado.numero_legajo }}</td>
+            <td>
+                <a href="{% url 'WebApp:empleado_detalle' empleado.id %}">Ver</a>
+                <a href="{% url 'WebApp:empleado_editar' empleado.id %}">Editar</a>
+            {% if listando_inactivos %}
+                <a href="{% url 'WebApp:empleado_cambiar_estado' empleado.id %}">Restaurar</a>
+            {% else %}
+                <a href="{% url 'WebApp:empleado_cambiar_estado' empleado.id %}">Eliminar</a>
+            {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% if listando_inactivos %}
+<p><a href="{% url 'WebApp:empleado_listar' %}">Listar activos</a></p>
+{% else %}
+<p><a href="{% url 'WebApp:empleado_listar_inactivos' %}">Listar inactivos</a></p>
+{% endif %}
