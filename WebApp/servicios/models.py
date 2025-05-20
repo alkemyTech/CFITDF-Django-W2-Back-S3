@@ -12,6 +12,10 @@ class Cliente(models.Model):
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
     activo = models.BooleanField(default=True)
+    
+    def baja_logica(self):
+        self.activo = False
+        self.save()
 
 
 class Empleado(models.Model):
@@ -19,6 +23,7 @@ class Empleado(models.Model):
     apellido = models.CharField(max_length=50)
     numero_legajo = models.IntegerField()
     activo = models.BooleanField(default=True)
+
 
 class Coordinador(models.Model):
     nombre = models.CharField(max_length=30)
