@@ -20,9 +20,10 @@
             <td>
                 <a href="{% url 'WebApp:servicio_detalle' servicio.id %}">Ver</a>
                 <a href="{% url 'WebApp:servicio_editar' servicio.id %}">Editar</a>
-                <a href="{% url 'WebApp:servicio_eliminar' servicio.id %}">Eliminar</a>
             {% if listando_inactivos %}
                 <a href="{% url 'WebApp:servicio_cambiar_estado' servicio.id %}">Restaurar</a>
+            {% else %}
+                <a href="{% url 'WebApp:servicio_cambiar_estado' servicio.id %}">Eliminar</a>
             {% endif %}
             </td>
         </tr>

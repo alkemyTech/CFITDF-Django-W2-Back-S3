@@ -59,18 +59,6 @@ class ServicioUpdateView(UpdateView):
         return context
     
 
-class ServicioDeleteView(DeleteView):
-    model = Servicio
-    template_name = 'eliminar.html'
-    context_object_name = 'servicio'
-    success_url = reverse_lazy('WebApp:servicio_listar')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["titulo_vista"] = "Eliminar Servicio"
-        return context
-    
-
 def servicio_cambiar_estado(request, pk):
     servicio = get_object_or_404(Servicio, id=pk)
     servicio.activo = not servicio.activo
