@@ -1,0 +1,16 @@
+<h1>{{titulo_vista}}</h1>
+
+<form method="post">{% csrf_token %}
+    <p>¿Estás seguro que quieres borrar "<strong>
+        {% if object.nombre and object.apellido %}
+            {{ object.nombre }} {{ object.apellido }}
+        {% elif object.nombre %}
+            {{ object.nombre }}
+        {% else %}
+            {{ object }}
+        {% endif %}
+    </strong>"?</p>
+    {{ form }}
+    <input type="submit" class="btn btn-danger" value="Confirmar">
+    <input type="button" class="btn btn-secondary" value="Cancelar" onclick="window.history.back();">
+</form>
