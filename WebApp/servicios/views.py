@@ -9,7 +9,7 @@ class ServicioCreateView(CreateView):
     model = Servicio
     template_name = 'editar.html'
     fields = '__all__'
-    success_url = reverse_lazy('WebApp:servicio_listar')
+    success_url = reverse_lazy('WebApp:servicio_crear')
 
     # Esto permite personalizar el contexto que se pasa a la plantilla.
     # De esta manera, editar.html puede ser usado tanto para crear como
