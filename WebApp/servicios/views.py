@@ -9,7 +9,7 @@ from .models import Empleado
 # Empleado
 class EmpleadoCreateView(CreateView):
     model = Empleado
-    template_name = 'editar.html'
+    template_name = 'empleado/editar.html'
     fields = '__all__'
     success_url = reverse_lazy('WebApp:empleado_listar')
 
@@ -35,7 +35,8 @@ class EmpleadoListView(ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["listando_inactivos"] = self.kwargs.get('inactivos', False)
+        #context["listando_inactivos"] = self.kwargs.get('inactivos', False)
+        context["listando_inactivos"] = True
         return context
     
     def get_queryset(self):
@@ -49,7 +50,7 @@ class EmpleadoListView(ListView):
 
 class EmpleadoUpdateView(UpdateView):
     model = Empleado
-    template_name = 'editar.html'
+    template_name = 'empleado/editar.html'
     fields = '__all__'
     success_url = reverse_lazy('WebApp:empleado_listar')
 

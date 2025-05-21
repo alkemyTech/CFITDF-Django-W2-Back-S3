@@ -16,7 +16,7 @@
             <td>{{ empleado.id }}</td>
             <td>{{ empleado.nombre }}</td>
             <td>{{ empleado.apellido }}</td>
-            <td>$ {{ empleado.numero_legajo }}</td>
+            <td>{{ empleado.numero_legajo }}</td>
             <td>
                 <a href="{% url 'WebApp:empleado_detalle' empleado.id %}">Ver</a>
                 <a href="{% url 'WebApp:empleado_editar' empleado.id %}">Editar</a>
