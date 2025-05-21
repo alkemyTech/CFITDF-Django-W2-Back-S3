@@ -8,10 +8,4 @@ urlpatterns = [
 
     # Servicios
     path('servicios/crear/', views.ServicioCreateView.as_view(), name='servicio_crear'),
-    path('servicios/<int:pk>/', views.ServicioDetailView.as_view(), name='servicio_detalle'),
-    path('servicios/', views.ServicioListView.as_view(), name='servicio_listar'),
-    path('servicios/listar/', views.ServicioListView.as_view(), name='servicio_listar'),
-    path('servicios/listar/inactivos/', views.ServicioListView.as_view(), {'inactivos': True}, name='servicio_listar_inactivos'),
-    path('servicios/editar/<int:pk>/', views.ServicioUpdateView.as_view(), name='servicio_editar'),
-    path('servicios/cambiar_estado/<int:pk>/', views.servicio_cambiar_estado, name='servicio_cambiar_estado'),
 ]
