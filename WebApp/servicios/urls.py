@@ -12,4 +12,6 @@ urlpatterns = [
     path('servicios/', views.ServicioListView.as_view(), name='servicio_listar'),
     path('servicios/listar/', views.ServicioListView.as_view(), name='servicio_listar'),
     path('servicios/listar/inactivos/', views.ServicioListView.as_view(), {'inactivos': True}, name='servicio_listar_inactivos'),
+    # ReservaServicio
+    path('reserva_servicio/crear/', views.ReservaServicioCreateView.as_view(), name='reserva_servicio_crear'),
 ]
