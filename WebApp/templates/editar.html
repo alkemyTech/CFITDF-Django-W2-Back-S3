@@ -1,0 +1,9 @@
+<!-- 
+ titulo_vista: se obtiene de get_context_data en la view
+  -->
+<h1>{{titulo_vista}}</h1>
+
+<form method="post">{% csrf_token %}
+    {{ form.as_div }}
+    <input type="submit" value="Guardar">
+</form>
