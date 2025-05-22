@@ -13,7 +13,10 @@ urlpatterns = [
     path('servicios/listar/', views.ServicioListView.as_view(), name='servicio_listar'),
     path('servicios/listar/inactivos/', views.ServicioListView.as_view(), {'inactivos': True}, name='servicio_listar_inactivos'),
      #Coordinador
-    path('coordinador/crear/', views.CoordinadorCreateView.as_view(), name='coordinador_crear')
+    path('coordinador/crear/', views.CoordinadorCreateView.as_view(), name='coordinador_crear'),
     # ReservaServicio
     path('reserva_servicio/crear/', views.ReservaServicioCreateView.as_view(), name='reserva_servicio_crear'),
+    path('reserva_servicio/<int:pk>/', views.ReservaServicioDetailView.as_view(), name='reserva_servicio_detalle'),
+    path('reserva_servicio/', views.ReservaServicioListView.as_view(), name='reserva_servicio_listar'),
+    path('reserva_servicio/listar/', views.ReservaServicioListView.as_view(), name='reserva_servicio_listar'),
 ]

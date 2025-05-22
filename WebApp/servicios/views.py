@@ -58,6 +58,7 @@ class CoordinadorCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titulo_vista"] = "Crear Coordinador"
+        return context
     
     
 # ReservaServicio
@@ -71,3 +72,23 @@ class ReservaServicioCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         context["titulo_vista"] = "Crear Reserva"
         return context
+    
+
+class ReservaServicioDetailView(DetailView):
+    model = ReservaServicio
+    template_name = 'servicios/detalle_reserva_servicio.html'
+    context_object_name = 'reserva_servicio'
+
+
+class ReservaServicioListView(ListView):
+    model = ReservaServicio
+    template_name = 'servicios/listar_reserva_servicio.html'
+    context_object_name = 'listado_reservas_servicios'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["listando_inactivos"] = self.kwargs.get('inactivos', False)
+        return context
+    
+    def get_queryset(self):
+        return ReservaServicio.objects.all() 

@@ -6,12 +6,17 @@ class ReservaServicioForm(forms.ModelForm):
         model = ReservaServicio
         fields = '__all__'
         widgets = {
-            'fecha_solicitada': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'fecha_solicitada_reserva': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['cliente'].queryset = Cliente.objects.filter(activo=True)
-        self.fields['servicio'].queryset = Servicio.objects.filter(activo=True)
-        self.fields['empleado'].queryset = Empleado.objects.filter(activo=True)
-        self.fields['coordinador'].queryset = Coordinador.objects.filter(activo=True)
+
+        if 'cliente' in self.fields:
+            self.fields['cliente'].queryset = Cliente.objects.filter(activo=True)
+        if 'servicio_solicitado' in self.fields:
+            self.fields['servicio_solicitado'].queryset = Servicio.objects.filter(activo=True)
+        if 'empleado_encargado' in self.fields:
+            self.fields['empleado_encargado'].queryset = Empleado.objects.filter(activo=True)
+        if 'coordinador_asignado' in self.fields:
+            self.fields['coordinador_asignado'].queryset = Coordinador.objects.filter(activo=True)

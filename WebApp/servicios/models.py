@@ -45,7 +45,7 @@ class Coordinador(models.Model):
 
 
 class ReservaServicio(models.Model):
-    fecha_registro_reserva = models.DateTimeField()
+    fecha_registro_reserva = models.DateTimeField(auto_now_add=True)
     fecha_solicitada_reserva = models.DateTimeField()
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, related_name="cliente")
     servicio_solicitado = models.ForeignKey(Servicio, on_delete=models.CASCADE, related_name="servicio")
@@ -53,4 +53,4 @@ class ReservaServicio(models.Model):
     coordinador_asignado = models.ForeignKey(Coordinador, on_delete=models.CASCADE, related_name="coordinador")
     
     def __str__(self):
-            return f"{self.servicio.nombre} ({self.fecha_solicitada})" 
+            return f"{self.servicio_solicitado.nombre} ({self.fecha_solicitada_reserva})" 
