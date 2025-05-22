@@ -1,9 +1,9 @@
 
 
 # Create your views here.
-from django.views.generic import CreateView, ListView, DetailView, UpdateView
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Servicio, Coordinador, ReservaServicio, Cliente
 from .forms import ReservaServicioForm 
@@ -180,5 +180,11 @@ class ReservaServicioUpdateView(UpdateView):
         context = super().get_context_data(**kwargs)
         context["titulo_vista"] = "Modificar Reserva"
         return context
+    
+
+class ReservaServicioDeleteView(DeleteView):
+    model = ReservaServicio
+    success_url = reverse_lazy("WebApp:reserva_servicio_listar")
+    template_name = "servicios/borrar.html"  
     
 
