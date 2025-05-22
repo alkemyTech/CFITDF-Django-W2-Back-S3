@@ -2,7 +2,9 @@
 
 # Create your views here.
 
-from django.views.generic import CreateView, ListView, DetailView
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
+from django.views.generic import CreateView, ListView, DetailView, UpdateView
 from django.urls import reverse_lazy
 from .models import Servicio, Coordinador, ReservaServicio
 from .forms import ReservaServicioForm 
@@ -46,6 +48,26 @@ class ServicioListView(ListView):
         if self.kwargs.get('inactivos', False):
             return queryset.filter(activo=False)
         return queryset.filter(activo=True)
+    
+
+class ServicioUpdateView(UpdateView):
+    model = Servicio
+    template_name = 'editar.html'
+    fields = '__all__'
+    success_url = reverse_lazy('WebApp:servicio_listar')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titulo_vista"] = "Modificar Servicio"
+        return context
+    
+# Si alguien conoce una forma más elegante de hacer esto, por favor
+# háganmelo saber
+def servicio_cambiar_estado(request, pk):
+    servicio = get_object_or_404(Servicio, id=pk)
+    servicio.activo = not servicio.activo
+    servicio.save()
+    return HttpResponseRedirect(reverse_lazy('WebApp:servicio_listar'))
       
       
 # Coordinador
