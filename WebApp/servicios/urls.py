@@ -8,4 +8,7 @@ urlpatterns = [
 
     # Servicios
     path('servicios/crear/', views.ServicioCreateView.as_view(), name='servicio_crear'),
+    #Coordinador
+    path('coordinador/crear/', views.CoordinadorCreateView.as_view(), name='coordinador_crear')
+
 ]

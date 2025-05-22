@@ -1,6 +1,6 @@
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView, ListView
 from django.urls import reverse_lazy
-from .models import Servicio
+from .models import Servicio, Coordinador
 
 # Create your views here.
 
@@ -17,4 +17,17 @@ class ServicioCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titulo_vista"] = "Crear Servicio"
+        return context
+    
+# Coordinador CRUD
+
+class CoordinadorCreateView(CreateView):
+    model = Coordinador
+    template_name = 'editar.html'
+    fields = '__all__'
+    success_url = reverse_lazy('WebApp:coordinador_crear')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titulo_vista"] = "Crear Coordinador"
         return context
