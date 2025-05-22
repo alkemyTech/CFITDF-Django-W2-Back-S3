@@ -1,12 +1,10 @@
-
-
 # Create your views here.
-
+from django.views.generic import CreateView, ListView, DetailView, UpdateView
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .models import Servicio, Coordinador, ReservaServicio
+from .models import Servicio, Coordinador, ReservaServicio, Cliente
 from .forms import ReservaServicioForm 
 
 # Servicios
@@ -68,8 +66,40 @@ def servicio_cambiar_estado(request, pk):
     servicio.activo = not servicio.activo
     servicio.save()
     return HttpResponseRedirect(reverse_lazy('WebApp:servicio_listar'))
-      
-      
+
+# Cliente
+class ClienteCreateView(CreateView):
+    model = Cliente
+    template_name = 'editar.html'
+    fields = '__all__'
+    success_url = reverse_lazy('WebApp:cliente_crear')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titulo_vista"] = "Crear Cliente"
+        return context
+
+class ClienteDetailView(DetailView):
+    model = Cliente
+    template_name = 'cliente/detalle.html'
+    context_object_name = 'cliente'
+
+class ClienteListView(ListView):
+    model = Cliente
+    template_name = 'cliente/listar.html'
+    context_object_name = 'listado_clientes'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["listando_inactivos"] = self.kwargs.get('inactivos', False)
+        return context
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.kwargs.get('inactivos', False):
+            return queryset.filter(activo=False)
+        return queryset.filter(activo=True)
+    
 # Coordinador
 class CoordinadorCreateView(CreateView):
     model = Coordinador
