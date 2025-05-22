@@ -1,0 +1,26 @@
+<h1>Detalle de Reserva</h1>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Fecha Solicitada</th>
+            <th>Servicio</th>
+            <th>Cliente</th>
+            <th>Empleado</th>
+            <th>Coordinador</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ reserva_servicio.id }}</td>
+            <td>{{ reserva_servicio.fecha_solicitada_reserva }}</td>
+            <td>{{ reserva_servicio.servicio_solicitado.nombre }}</td>
+            <td>{{ reserva_servicio.cliente.nombre }}</td>
+            <td>{{ reserva_servicio.empleado_encargado.nombre }}</td>
+            <td>{{ reserva_servicio.coordinador_asignado.nombre }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<p><a href="{% url 'WebApp:reserva_servicio_listar' %}">Listado de Reservas</a></p>
