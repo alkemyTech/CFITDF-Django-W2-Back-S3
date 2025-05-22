@@ -1,0 +1,22 @@
+<h1>Detalle de Empleado</h1>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Número de legajo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ empleado.id }}</td>
+            <td>{{ empleado.nombre }}</td>
+            <td>{{ empleado.apellido }}</td>
+            <td>{{ empleado.numero_legajo }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<p><a href="{% url 'WebApp:empleado_listar' %}">Listado de empleados</a></p>
