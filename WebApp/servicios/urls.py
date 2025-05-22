@@ -14,6 +14,11 @@ urlpatterns = [
     path('servicios/listar/inactivos/', views.ServicioListView.as_view(), {'inactivos': True}, name='servicio_listar_inactivos'),
     path('servicios/editar/<int:pk>/', views.ServicioUpdateView.as_view(), name='servicio_editar'),
     path('servicios/cambiar_estado/<int:pk>/', views.servicio_cambiar_estado, name='servicio_cambiar_estado'),
+    # Cliente
+    path('cliente/crear/', views.ClienteCreateView.as_view(), name='cliente_crear'),
+    path('cliente/<int:pk>/', views.ClienteDetailView.as_view(), name='cliente_detalle'),
+    path('cliente/listar/', views.ClienteListView.as_view(), name='cliente_listar'),
+    path('cliente/listar/inactivos', views.ClienteListView.as_view(), {'inactivos':True}, name='cliente_listar_inactivos'),
      #Coordinador
     path('coordinador/crear/', views.CoordinadorCreateView.as_view(), name='coordinador_crear'),
     path('coordinador/crear/', views.CoordinadorCreateView.as_view(), name='coordinador_crear'),
@@ -25,6 +30,5 @@ urlpatterns = [
     path('reserva_servicio/<int:pk>/', views.ReservaServicioDetailView.as_view(), name='reserva_servicio_detalle'),
     path('reserva_servicio/', views.ReservaServicioListView.as_view(), name='reserva_servicio_listar'),
     path('reserva_servicio/listar/', views.ReservaServicioListView.as_view(), name='reserva_servicio_listar'),
-    path('reserva_servicio/editar/<int:pk>/', views.ReservaServicioUpdateView.as_view(), name='reserva_servicio_editar'),
-    path("reserva_servicio/borrar/<int:pk>", views.ReservaServicioDeleteView.as_view(), name="reserva_servicio_borrar"),
+    path("reserva_servicio/borrar/<int:pk>", views.ReservaServicioDeleteView.as_view(), name="reserva_servicio_borrar"),path('reserva_servicio/editar/<int:pk>/', views.ReservaServicioUpdateView.as_view(), name='reserva_servicio_editar'),
 ]
