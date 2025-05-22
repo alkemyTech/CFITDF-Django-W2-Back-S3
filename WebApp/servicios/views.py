@@ -1,6 +1,10 @@
+
+
+# Create your views here.
+
 from django.views.generic import CreateView, ListView, DetailView
 from django.urls import reverse_lazy
-from .models import Servicio, ReservaServicio
+from .models import Servicio, Coordinador, ReservaServicio
 from .forms import ReservaServicioForm 
 
 # Servicios
@@ -17,7 +21,7 @@ class ServicioCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         context["titulo_vista"] = "Crear Servicio"
         return context
-
+    
 
 class ServicioDetailView(DetailView):
     model = Servicio
@@ -42,6 +46,18 @@ class ServicioListView(ListView):
         if self.kwargs.get('inactivos', False):
             return queryset.filter(activo=False)
         return queryset.filter(activo=True)
+      
+      
+# Coordinador
+class CoordinadorCreateView(CreateView):
+    model = Coordinador
+    template_name = 'editar.html'
+    fields = '__all__'
+    success_url = reverse_lazy('WebApp:coordinador_crear')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titulo_vista"] = "Crear Coordinador"
     
     
 # ReservaServicio
