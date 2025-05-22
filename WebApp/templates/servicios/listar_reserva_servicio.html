@@ -1,5 +1,4 @@
 <h1>Listado de Reservas</h1>
-<p>Reservas encontradas: {{ listado_reservas_servicios|length }}</p>
 
 <table border="1">
     <thead>
@@ -25,6 +24,7 @@
             <td>
                 <a href="{% url 'WebApp:reserva_servicio_detalle' reserva_servicio.id %}">Ver</a>
                 <a href="{% url 'WebApp:reserva_servicio_editar' reserva_servicio.id %}">Editar</a>
+                <a href="{% url 'WebApp:reserva_servicio_borrar' reserva_servicio.id %}">Borrar</a>
             </td>
         </tr>
         {% endfor %}
