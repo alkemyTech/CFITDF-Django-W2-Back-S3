@@ -1,8 +1,7 @@
 from django.views.generic import CreateView, ListView, DetailView
 from django.urls import reverse_lazy
-from .models import Servicio
-
-# Create your views here.
+from .models import Servicio, ReservaServicio
+from .forms import ReservaServicioForm 
 
 # Servicios
 class ServicioCreateView(CreateView):
@@ -43,3 +42,16 @@ class ServicioListView(ListView):
         if self.kwargs.get('inactivos', False):
             return queryset.filter(activo=False)
         return queryset.filter(activo=True)
+    
+    
+# ReservaServicio
+class ReservaServicioCreateView(CreateView):
+    model = ReservaServicio
+    template_name = 'editar.html'
+    form_class = ReservaServicioForm 
+    success_url = reverse_lazy('WebApp:reserva_servicio_crear')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titulo_vista"] = "Crear Reserva"
+        return context
