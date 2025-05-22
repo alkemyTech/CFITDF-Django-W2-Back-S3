@@ -10,6 +10,7 @@
             <th>Cliente</th>
             <th>Empleado</th>
             <th>Coordinador</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -23,6 +24,7 @@
             <td>{{ reserva_servicio.coordinador_asignado.nombre }}</td>
             <td>
                 <a href="{% url 'WebApp:reserva_servicio_detalle' reserva_servicio.id %}">Ver</a>
+                <a href="{% url 'WebApp:reserva_servicio_editar' reserva_servicio.id %}">Editar</a>
             </td>
         </tr>
         {% endfor %}

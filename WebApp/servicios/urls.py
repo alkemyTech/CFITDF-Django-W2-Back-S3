@@ -24,6 +24,6 @@ urlpatterns = [
     path('reserva_servicio/crear/', views.ReservaServicioCreateView.as_view(), name='reserva_servicio_crear'),
     path('reserva_servicio/<int:pk>/', views.ReservaServicioDetailView.as_view(), name='reserva_servicio_detalle'),
     path('reserva_servicio/', views.ReservaServicioListView.as_view(), name='reserva_servicio_listar'),
-    path('reserva_servicio/listar/', views.ReservaServicioListView.as_view(), name='reserva_servicio_listar')
-   
+    path('reserva_servicio/listar/', views.ReservaServicioListView.as_view(), name='reserva_servicio_listar'),
+    path('reserva_servicio/editar/<int:pk>/', views.ReservaServicioUpdateView.as_view(), name='reserva_servicio_editar'),
 ]

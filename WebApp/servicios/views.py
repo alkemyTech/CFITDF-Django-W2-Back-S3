@@ -138,3 +138,15 @@ class ReservaServicioListView(ListView):
         return ReservaServicio.objects.all() 
     
 
+class ReservaServicioUpdateView(UpdateView):
+    model = ReservaServicio
+    template_name = 'editar.html'
+    form_class = ReservaServicioForm 
+    success_url = reverse_lazy('WebApp:reserva_servicio_listar')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titulo_vista"] = "Modificar Reserva"
+        return context
+    
+
