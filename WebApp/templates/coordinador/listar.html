@@ -1,0 +1,32 @@
+<h1>Listado de coordinadores</h1>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Numero de documento</th>
+            <th>Fecha de alta|</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for coordinador in listado_coordinador %}
+        <tr>
+            <td>{{ coordinador.id }}</td>
+            <td>{{ coordinador.nombre }}</td>
+            <td>{{ coordinador.apellido }}</td>
+            <td>{{ coordinador.numero_documento }}</td>
+            <td>{{ coordinador.fecha_alta }}</td>
+            <td>
+                <a href="{% url 'WebApp:coordinador_detalle' coordinador.id %}">Ver</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% if listando_inactivos %}
+<p><a href="{% url 'WebApp:coordinador_listar' %}">Listar activos</a></p>
+{% else %}
+<p><a href="{% url 'WebApp:coordinador_listar_inactivos' %}">Listar inactivos</a></p>
+{% endif %}
