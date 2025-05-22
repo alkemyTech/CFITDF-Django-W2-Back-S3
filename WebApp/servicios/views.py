@@ -104,6 +104,24 @@ class CoordinadorListView(ListView):
             return queryset.filter(activo=False)
         return queryset.filter(activo=True)
     
+
+class CoordinadorUpdateView(UpdateView):
+    model = Coordinador
+    template_name = 'coordinador/editar.html'
+    fields = '__all__'
+    success_url = reverse_lazy('WebApp:coordinador_listar')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titulo_vista"] = "Modificar Coordinador"
+        return context
+
+def coordinador_cambiar_estado(request, pk):
+    coordinador = get_object_or_404(Coordinador, id=pk)
+    coordinador.activo = not coordinador.activo
+    coordinador.save()
+    return HttpResponseRedirect(reverse_lazy('WebApp:coordinador_listar'))
+    
     
 # ReservaServicio
 class ReservaServicioCreateView(CreateView):

@@ -20,6 +20,8 @@ urlpatterns = [
     path('coordinador/<int:pk>/', views.CoordinadorDetailView.as_view(), name = 'coordinador_detalle'),
     path('coordinador/', views.CoordinadorListView.as_view(), name = 'coordinador_listar'),
     path('coordinador/inactivos', views.CoordinadorListView.as_view(), {'inactivos':True}, name = 'coordinador_listar_inactivos'),
+    path('coordinador/editar/<int:pk>/', views.CoordinadorUpdateView.as_view, name='coordinador_editar'),
+    path('coordinador/cambiar_estado/<int:pk>/', views.coordinador_cambiar_estado, name='coordinador_cabiar_estado'),
     # ReservaServicio
     path('reserva_servicio/crear/', views.ReservaServicioCreateView.as_view(), name='reserva_servicio_crear'),
     path('reserva_servicio/<int:pk>/', views.ReservaServicioDetailView.as_view(), name='reserva_servicio_detalle'),
