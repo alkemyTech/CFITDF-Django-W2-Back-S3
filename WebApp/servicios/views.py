@@ -99,7 +99,25 @@ class ClienteListView(ListView):
         if self.kwargs.get('inactivos', False):
             return queryset.filter(activo=False)
         return queryset.filter(activo=True)
-    
+      
+      
+class ClienteUpdateView(UpdateView):
+    model = Cliente
+    template_name = 'editar.html'
+    fields = '__all__'
+    success_url = reverse_lazy('WebApp:cliente_listar')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titulo_vista"] = "Modificar Cliente"
+        return context
+
+
+class ClienteDeleteView(DeleteView):
+    model = Cliente
+    success_url = reverse_lazy("WebApp:cliente_listar")
+    template_name = "cliente/borrar.html"      
+
 # Coordinador
 class CoordinadorCreateView(CreateView):
     model = Coordinador
@@ -133,7 +151,6 @@ class CoordinadorListView(ListView):
         if self.kwargs.get('inactivos', False):
             return queryset.filter(activo=False)
         return queryset.filter(activo=True)
-    
     
 # ReservaServicio
 class ReservaServicioCreateView(CreateView):
@@ -185,8 +202,6 @@ class ReservaServicioDeleteView(DeleteView):
     success_url = reverse_lazy("WebApp:reserva_servicio_listar")
     template_name = "servicios/borrar.html"  
     
-
-
 # Empleado
 class EmpleadoCreateView(CreateView):
     model = Empleado

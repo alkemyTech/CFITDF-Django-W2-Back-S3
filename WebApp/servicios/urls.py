@@ -24,6 +24,8 @@ urlpatterns = [
     path('cliente/<int:pk>/', views.ClienteDetailView.as_view(), name='cliente_detalle'),
     path('cliente/listar/', views.ClienteListView.as_view(), name='cliente_listar'),
     path('cliente/listar/inactivos', views.ClienteListView.as_view(), {'inactivos':True}, name='cliente_listar_inactivos'),
+    path('cliente/editar/<int:pk>/', views.ClienteUpdateView.as_view(), name='cliente_editar'),
+    path('cliente/borrar/<int:pk>/', views.ClienteDeleteView.as_view(), name='cliente_borrar'),
      #Coordinador
     path('coordinador/crear/', views.CoordinadorCreateView.as_view(), name='coordinador_crear'),
     path('coordinador/crear/', views.CoordinadorCreateView.as_view(), name='coordinador_crear'),
