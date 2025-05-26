@@ -4,8 +4,6 @@ from . import views
 app_name = 'WebApp'
 
 urlpatterns = [
-    #path('', views.home, name='home'),
-
     # Servicios
     path('servicios/crear/', views.ServicioCreateView.as_view(), name='servicio_crear'),
     path('servicios/<int:pk>/', views.ServicioDetailView.as_view(), name='servicio_detalle'),
@@ -14,6 +12,13 @@ urlpatterns = [
     path('servicios/listar/inactivos/', views.ServicioListView.as_view(), {'inactivos': True}, name='servicio_listar_inactivos'),
     path('servicios/editar/<int:pk>/', views.ServicioUpdateView.as_view(), name='servicio_editar'),
     path('servicios/cambiar_estado/<int:pk>/', views.servicio_cambiar_estado, name='servicio_cambiar_estado'),
+    # Empleado
+    path('empleado/crear/', views.EmpleadoCreateView.as_view(), name='empleado_crear'),
+    path('empleado/<int:pk>/', views.EmpleadoDetailView.as_view(), name='empleado_detalle'),
+    path('empleado/listar/', views.EmpleadoListView.as_view(), name='empleado_listar'),
+    path('empleado/listar/inactivos/', views.EmpleadoListView.as_view(), name='empleado_listar_inactivos'),
+    path('empleado/editar/<int:pk>/', views.EmpleadoUpdateView.as_view(), name='empleado_editar'),
+    path('empleado/cambiar_estado/<int:pk>/', views.empleado_cambiar_estado, name='empleado_cambiar_estado'),
     # Cliente
     path('cliente/crear/', views.ClienteCreateView.as_view(), name='cliente_crear'),
     path('cliente/<int:pk>/', views.ClienteDetailView.as_view(), name='cliente_detalle'),
