@@ -20,6 +20,12 @@
             <td>{{ coordinador.fecha_alta }}</td>
             <td>
                 <a href="{% url 'WebApp:coordinador_detalle' coordinador.id %}">Ver</a>
+                <a href ="{% url 'WebApp:coordinador_editar' coordinador.id %}"> Editar</a>
+                {% if listando_inactivos %}
+                    <a href="{% url 'WebApp:coordinador_cambiar_estado' coordinador.id %}">Restaurar</a>
+                {% else %}
+                    <a href="{% url 'WebApp:coordinador_cambiar_estado' coordinador.id %}">Borrar</a>
+                {% endif %}
             </td>
         </tr>
         {% endfor %}
