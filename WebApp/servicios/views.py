@@ -117,8 +117,7 @@ class ClienteUpdateView(UpdateView):
         cliente.activo = not cliente.activo
         cliente.save()
         return HttpResponseRedirect(reverse_lazy('WebApp:cliente_listar'))
-      
-
+    
 # Coordinador
 class CoordinadorCreateView(CreateView):
     model = Coordinador
