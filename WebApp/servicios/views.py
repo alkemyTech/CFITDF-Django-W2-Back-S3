@@ -112,12 +112,12 @@ class ClienteUpdateView(UpdateView):
         context["titulo_vista"] = "Modificar Cliente"
         return context
 
-
-class ClienteDeleteView(DeleteView):
-    model = Cliente
-    success_url = reverse_lazy("WebApp:cliente_listar")
-    template_name = "cliente/borrar.html"      
-
+    def servicio_cambiar_estado(request, pk):
+        cliente = get_object_or_404(Cliente, id=pk)
+        cliente.activo = not cliente.activo
+        cliente.save()
+        return HttpResponseRedirect(reverse_lazy('WebApp:cliente_listar'))
+    
 # Coordinador
 class CoordinadorCreateView(CreateView):
     model = Coordinador
