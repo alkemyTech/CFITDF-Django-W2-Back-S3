@@ -1,5 +1,4 @@
 # Create your views here.
-from django.views.generic import CreateView, ListView, DetailView, UpdateView
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
@@ -112,11 +111,11 @@ class ClienteUpdateView(UpdateView):
         context["titulo_vista"] = "Modificar Cliente"
         return context
 
-    def servicio_cambiar_estado(request, pk):
-        cliente = get_object_or_404(Cliente, id=pk)
-        cliente.activo = not cliente.activo
-        cliente.save()
-        return HttpResponseRedirect(reverse_lazy('WebApp:cliente_listar'))
+def cliente_cambiar_estado(request, pk):
+    cliente = get_object_or_404(Cliente, id=pk)
+    cliente.activo = not cliente.activo
+    cliente.save()
+    return HttpResponseRedirect(reverse_lazy('WebApp:cliente_listar'))
     
 # Coordinador
 class CoordinadorCreateView(CreateView):
@@ -274,7 +273,6 @@ class EmpleadoUpdateView(UpdateView):
         context["titulo_vista"] = "Modificar Empleado"
         return context
     
-
 def empleado_cambiar_estado(request, pk):
     empleado = get_object_or_404(Empleado, id=pk)
     empleado.activo = not empleado.activo
