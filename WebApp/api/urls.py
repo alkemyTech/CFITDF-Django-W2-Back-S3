@@ -17,6 +17,7 @@ urlpatterns = [
     path('clientes/<int:pk>/', ClienteRetrieveAPIView.as_view(), name='cliente_detalle'),
     # Coordinadores
     path('coordinadores/', CoordinadorAPIView.as_view(), name='coordinador_listar'),
+    path('coordinadores/<int:pk>/', CoordinadorRetriveAPIView.as_view(), name='coordinador_detalle'),
     # Empleados
     path('empleados/', EmpleadoListAPIView.as_view(), name='empleado_listar'),
     path('empleados/<int:pk>/', EmpleadoRetrieveAPIView.as_view(), name='empleado_detalle'),
