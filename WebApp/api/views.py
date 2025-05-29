@@ -1,9 +1,9 @@
 #from django.shortcuts import render
 from rest_framework.generics import ListAPIView, RetrieveAPIView
-from .serializers import ServicioSerializer
-from servicios.models import Servicio
+from .serializers import ServicioSerializer, CoordinadorSerializer
+from servicios.models import Servicio, Coordinador
 
-# Create your views here.
+# Servicios
 class ServicioListAPIView(ListAPIView):
     queryset = Servicio.objects.all()
     serializer_class = ServicioSerializer
@@ -18,3 +18,9 @@ class ServicioRetrieveAPIView(RetrieveAPIView):
 
     def get_view_name(self):
         return "Detalle de Servicio"
+    
+    
+# Coordinadores
+class CoordinadorAPIView(ListAPIView):
+    queryset = Coordinador.objects.all()
+    serializer_class = CoordinadorSerializer
