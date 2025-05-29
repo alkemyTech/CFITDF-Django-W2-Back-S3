@@ -33,3 +33,11 @@ class EmpleadoListAPIView(ListAPIView):
 
     def get_view_name(self):
         return "Lista de Empleados"
+
+
+class EmpleadoRetrieveAPIView(RetrieveAPIView):
+    queryset = Empleado.objects.all()
+    serializer_class = EmpleadoSerializer
+
+    def get_view_name(self):
+        return "Detalle de Empleado"
