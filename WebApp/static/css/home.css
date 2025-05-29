@@ -1,0 +1,36 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #121212;
+  color: #f1f1f1;
+}
+.card-home {
+  height: 170px;
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  color: #f1f1f1;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+  user-select: none;
+}
+.card-home:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 123, 255, 0.6);
+  background-color: #272727;
+}
+.card-home:hover i,
+.card-home:hover div {
+  color: #0d6efd;
+  transition: color 0.3s ease;
+}
+.card-home div {
+  font-size: 1.15rem;
+  line-height: 1.4;
+  font-weight: 600;
+}
+a:focus .card-home {
+  outline: 3px solid #0d6efd;
+  outline-offset: 3px;
+}
+.card-home i {
+  font-size: 2rem;
+}

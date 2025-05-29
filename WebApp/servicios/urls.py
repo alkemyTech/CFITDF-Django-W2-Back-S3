@@ -4,6 +4,7 @@ from . import views
 app_name = 'WebApp'
 
 urlpatterns = [
+    path('home/', views.home, name='home'),
     # Servicios
     path('servicios/crear/', views.ServicioCreateView.as_view(), name='servicio_crear'),
     path('servicios/<int:pk>/', views.ServicioDetailView.as_view(), name='servicio_detalle'),

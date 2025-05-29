@@ -1,10 +1,14 @@
 # Create your views here.
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Servicio, Coordinador, ReservaServicio, Cliente, Empleado
 from .forms import ReservaServicioForm 
+
+
+def home(request):
+    return render(request, 'home.html')
 
 # Servicios
 class ServicioCreateView(CreateView):
