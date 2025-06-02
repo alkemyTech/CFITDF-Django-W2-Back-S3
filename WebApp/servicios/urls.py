@@ -16,6 +16,7 @@ urlpatterns = [
     # Empleado
     path('empleado/crear/', views.EmpleadoCreateView.as_view(), name='empleado_crear'),
     path('empleado/<int:pk>/', views.EmpleadoDetailView.as_view(), name='empleado_detalle'),
+    path('empleado/', views.EmpleadoListView.as_view(), name='empleado_listar'),
     path('empleado/listar/', views.EmpleadoListView.as_view(), name='empleado_listar'),
     path('empleado/listar/inactivos/', views.EmpleadoListView.as_view(), {'inactivos': True}, name='empleado_listar_inactivos'),
     path('empleado/editar/<int:pk>/', views.EmpleadoUpdateView.as_view(), name='empleado_editar'),
@@ -23,16 +24,17 @@ urlpatterns = [
     # Cliente
     path('cliente/crear/', views.ClienteCreateView.as_view(), name='cliente_crear'),
     path('cliente/<int:pk>/', views.ClienteDetailView.as_view(), name='cliente_detalle'),
+    path('cliente/', views.ClienteListView.as_view(), name='cliente_listar'),
     path('cliente/listar/', views.ClienteListView.as_view(), name='cliente_listar'),
-    path('cliente/listar/inactivos', views.ClienteListView.as_view(), {'inactivos':True}, name='cliente_listar_inactivos'),
+    path('cliente/listar/inactivos/', views.ClienteListView.as_view(), {'inactivos':True}, name='cliente_listar_inactivos'),
     path('cliente/editar/<int:pk>/', views.ClienteUpdateView.as_view(), name='cliente_editar'),
     path('cliente/cambiar_estado/<int:pk>/', views.cliente_cambiar_estado, name='cliente_cambiar_estado'),
      #Coordinador
     path('coordinador/crear/', views.CoordinadorCreateView.as_view(), name='coordinador_crear'),
-    path('coordinador/crear/', views.CoordinadorCreateView.as_view(), name='coordinador_crear'),
     path('coordinador/<int:pk>/', views.CoordinadorDetailView.as_view(), name = 'coordinador_detalle'),
     path('coordinador/', views.CoordinadorListView.as_view(), name = 'coordinador_listar'),
-    path('coordinador/inactivos', views.CoordinadorListView.as_view(), {'inactivos':True}, name = 'coordinador_listar_inactivos'),
+    path('coordinador/listar/', views.CoordinadorListView.as_view(), name = 'coordinador_listar'),
+    path('coordinador/listar/inactivos/', views.CoordinadorListView.as_view(), {'inactivos':True}, name = 'coordinador_listar_inactivos'),
     path('coordinador/editar/<int:pk>/', views.CoordinadorUpdateView.as_view(), name='coordinador_editar'),
     path('coordinador/cambiar_estado/<int:pk>/', views.coordinador_cambiar_estado, name='coordinador_cambiar_estado'),
     # ReservaServicio
