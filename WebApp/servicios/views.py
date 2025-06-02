@@ -189,13 +189,13 @@ class ReservaServicioCreateView(CreateView):
 
 class ReservaServicioDetailView(DetailView):
     model = ReservaServicio
-    template_name = 'servicios/detalle_reserva_servicio.html'
+    template_name = 'reserva/detalle.html'
     context_object_name = 'reserva_servicio'
 
 
 class ReservaServicioListView(ListView):
     model = ReservaServicio
-    template_name = 'servicios/listar_reserva_servicio.html'
+    template_name = 'reserva/listar.html'
     context_object_name = 'listado_reservas_servicios'
     
     def get_context_data(self, **kwargs):
@@ -222,7 +222,7 @@ class ReservaServicioUpdateView(UpdateView):
 class ReservaServicioDeleteView(DeleteView):
     model = ReservaServicio
     success_url = reverse_lazy("WebApp:reserva_servicio_listar")
-    template_name = "servicios/borrar.html"  
+    template_name = "reserva/borrar.html"  
     
 # Empleado
 class EmpleadoCreateView(CreateView):
