@@ -1,37 +1,199 @@
-<h1>Listado de Servicios</h1>
+{% extends 'base.html' %}
+{% load static %}
 
-<table border="1">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Precio</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for servicio in listado_servicios %}
-        <tr>
-            <td>{{ servicio.id }}</td>
-            <td>{{ servicio.nombre }}</td>
-            <td>{{ servicio.descripcion }}</td>
-            <td>$ {{ servicio.precio }}</td>
-            <td>
-                <a href="{% url 'WebApp:servicio_detalle' servicio.id %}">Ver</a>
-                <a href="{% url 'WebApp:servicio_editar' servicio.id %}">Editar</a>
-            {% if listando_inactivos %}
-                <a href="{% url 'WebApp:servicio_cambiar_estado' servicio.id %}">Restaurar</a>
-            {% else %}
-                <a href="{% url 'WebApp:servicio_cambiar_estado' servicio.id %}">Eliminar</a>
-            {% endif %}
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% if listando_inactivos %}
-<p><a href="{% url 'WebApp:servicio_listar' %}">Listar activos</a></p>
-{% else %}
-<p><a href="{% url 'WebApp:servicio_listar_inactivos' %}">Listar inactivos</a></p>
-{% endif %}
+{% block titulo %}
+  {% if listando_inactivos %}
+    Servicios Inactivos - Sistema de Reservas
+  {% else %}
+    Servicios - Sistema de Reservas
+  {% endif %}
+{% endblock %}
+
+{% block head_extra %}
+  <style>
+    .card-header {
+      background-color: var(--bs-dark);
+      color: white;
+    }
+    .table-actions a {
+      margin: 0 2px;
+    }
+    .btn-sm {
+      font-size: 0.8rem;
+    }
+    .price-badge {
+      font-weight: bold;
+      color: #28a745;
+    }
+    .service-description {
+      max-width: 300px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #6c757d;
+    }
+    .empty-state i {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+  </style>
+{% endblock %}
+
+{% block contenido %}
+<div class="container-fluid mt-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-xl-10">
+      <div class="card shadow-sm">
+        <div class="card-header">
+          <div class="d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">
+              <i class="bi bi-gear-fill me-2"></i>
+              {% if listando_inactivos %}
+                Servicios Inactivos
+              {% else %}
+                Listado de Servicios
+              {% endif %}
+            </h3>
+            <div class="btn-group" role="group">
+              {% if listando_inactivos %}
+                <a href="{% url 'WebApp:servicio_listar' %}" class="btn btn-outline-light btn-sm">
+                  <i class="bi bi-list me-1"></i>Ver Activos
+                </a>
+              {% else %}
+                <a href="{% url 'WebApp:servicio_listar_inactivos' %}" class="btn btn-outline-light btn-sm">
+                  <i class="bi bi-archive me-1"></i>Ver Inactivos
+                </a>
+              {% endif %}
+              <a href="{% url 'WebApp:servicio_crear' %}" class="btn btn-light btn-sm">
+                <i class="bi bi-plus-circle me-1"></i>Nuevo Servicio
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card-body p-0">
+          {% if listado_servicios %}
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead class="table-light">
+                  <tr>
+                    <th scope="col" class="text-center" style="width: 80px;">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col" class="d-none d-md-table-cell">Descripción</th>
+                    <th scope="col" class="text-end" style="width: 120px;">Precio</th>
+                    <th scope="col" class="text-center" style="width: 200px;">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for servicio in listado_servicios %}
+                  <tr>
+                    <td class="text-center text-muted fw-bold">{{ servicio.id }}</td>
+                    <td>
+                      <div class="fw-semibold">{{ servicio.nombre }}</div>
+                      <div class="d-md-none">
+                        <small class="text-muted">{{ servicio.descripcion|truncatechars:50 }}</small>
+                      </div>
+                    </td>
+                    <td class="d-none d-md-table-cell">
+                      <span class="service-description" title="{{ servicio.descripcion }}">
+                        {{ servicio.descripcion }}
+                      </span>
+                    </td>
+                    <td class="text-end">
+                      <span class="price-badge">$ {{ servicio.precio }}</span>
+                    </td>
+                    <td class="text-center table-actions">
+                      <div class="btn-group btn-group-sm" role="group">
+                        <a href="{% url 'WebApp:servicio_detalle' servicio.id %}" 
+                           class="btn btn-outline-primary" 
+                           title="Ver detalles"
+                           aria-label="Ver detalles del servicio {{ servicio.nombre }}">
+                          <i class="bi bi-eye"></i>
+                        </a>
+                        <a href="{% url 'WebApp:servicio_editar' servicio.id %}" 
+                           class="btn btn-outline-secondary" 
+                           title="Editar"
+                           aria-label="Editar servicio {{ servicio.nombre }}">
+                          <i class="bi bi-pencil"></i>
+                        </a>
+                        {% if listando_inactivos %}
+                          <a href="{% url 'WebApp:servicio_cambiar_estado' servicio.id %}" 
+                             class="btn btn-outline-success" 
+                             title="Restaurar"
+                             aria-label="Restaurar servicio {{ servicio.nombre }}"
+                             onclick="return confirm('¿Está seguro que desea restaurar este servicio?')">
+                            <i class="bi bi-arrow-clockwise"></i>
+                          </a>
+                        {% else %}
+                          <a href="{% url 'WebApp:servicio_cambiar_estado' servicio.id %}" 
+                             class="btn btn-outline-danger" 
+                             title="Eliminar"
+                             aria-label="Eliminar servicio {{ servicio.nombre }}"
+                             onclick="return confirm('¿Está seguro que desea eliminar este servicio?')">
+                            <i class="bi bi-trash"></i>
+                          </a>
+                        {% endif %}
+                      </div>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          {% else %}
+            <div class="empty-state">
+              <i class="bi bi-inbox"></i>
+              <h4>
+                {% if listando_inactivos %}
+                  No hay servicios inactivos
+                {% else %}
+                  No hay servicios registrados
+                {% endif %}
+              </h4>
+              <p class="mb-3">
+                {% if listando_inactivos %}
+                  Todos los servicios están actualmente activos.
+                {% else %}
+                  Comience agregando un nuevo servicio al sistema.
+                {% endif %}
+              </p>
+              {% if not listando_inactivos %}
+                <a href="{% url 'WebApp:servicio_crear' %}" class="btn btn-primary">
+                  <i class="bi bi-plus-circle me-2"></i>Crear Primer Servicio
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+        
+        {% if listado_servicios %}
+        <div class="card-footer bg-light">
+          <div class="d-flex justify-content-between align-items-center">
+            <small class="text-muted">
+              Total: {{ listado_servicios|length }} servicio{{ listado_servicios|length|pluralize }}
+              {% if listando_inactivos %}inactivo{{ listado_servicios|length|pluralize }}{% endif %}
+            </small>
+            <div class="btn-group btn-group-sm">
+              {% if listando_inactivos %}
+                <a href="{% url 'WebApp:servicio_listar' %}" class="btn btn-outline-primary">
+                  <i class="bi bi-list me-1"></i>Ver Servicios Activos
+                </a>
+              {% else %}
+                <a href="{% url 'WebApp:servicio_listar_inactivos' %}" class="btn btn-outline-secondary">
+                  <i class="bi bi-archive me-1"></i>Ver Servicios Inactivos
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
