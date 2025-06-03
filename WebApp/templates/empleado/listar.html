@@ -89,36 +89,38 @@
                     <td>{{ empleado.apellido }}</td> 
                     <td>{{ empleado.numero_legajo }}</td>
                     <td class="text-center table-actions">
-                        <div class="btn-group btn-group-sm" role="group">
-                            <a href="{% url 'WebApp:empleado_detalle' empleado.id %}"
-                            class="btn btn-outline-primary" 
-                            title="Ver detalles"
-                            aria-label="Ver detalles del empleado {{ empleado.nombre }}">
-                            <i class="bi bi-eye"></i>
+                      <div class="btn-group btn-group-sm" role="group">
+                        <a href="{% url 'WebApp:empleado_detalle' empleado.id %}"
+                           class="btn btn-outline-primary" 
+                           title="Ver detalles"
+                           aria-label="Ver detalles del empleado {{ empleado.nombre }}">
+                           <i class="bi bi-eye"></i>
                         </a>
                         <a href="{% url 'WebApp:empleado_editar' empleado.id %}"
-                        class="btn btn-outline-secondary"
-                        title="Editar"
-                        aria-label="Editar empleado {{ empleado.nombre }}">
-                        <i class="bi bi-pencil"></i>
-                        </a
-                        {% if listando_inactivos %}
-                          <a href="{% url 'WebApp:empleado_cambiar_estado' empleado.id %}" 
-                               class="btn btn-outline-success" 
-                               title="Restaurar"
-                               aria-label="Restaurar empleado {{ empleado.nombre }}"
-                               onclick="return confirm('¿Está seguro que desea restaurar este empleado?')">
-                            <i class="bi bi-arrow-clockwise"></i>
-                          </a>
-                        {% else %}
-                          <a href="{% url 'WebApp:empleado_cambiar_estado' empleado.id %}" 
-                               class="btn btn-outline-danger" 
-                               title="Eliminar"
-                               aria-label="Eliminar empleado {{ empleado.nombre }}"
-                               onclick="return confirm('¿Está seguro que desea eliminar este empleado?')">
-                            <i class="bi bi-trash"></i>
-                          </a>
-                        {% endif %}
+                           class="btn btn-outline-secondary"
+                           title="Editar"
+                           aria-label="Editar empleado {{ empleado.nombre }}">
+                           <i class="bi bi-pencil"></i>
+                        </a>
+                        
+                        <form action="{% url 'WebApp:empleado_cambiar_estado' empleado.id %}" method="post" class="d-inline">
+                            {% csrf_token %} {# ¡ESTO ES CRÍTICO PARA LAS SOLICITUDES POST EN DJANGO! #}
+                            {% if listando_inactivos %}
+                                <button type="submit" class="btn btn-outline-success" 
+                                        title="Restaurar"
+                                        aria-label="Restaurar empleado {{ empleado.nombre }}"
+                                        onclick="return confirm('¿Está seguro que desea restaurar este empleado?')">
+                                    <i class="bi bi-arrow-clockwise"></i>
+                                </button>
+                            {% else %}
+                                <button type="submit" class="btn btn-outline-danger" 
+                                        title="Desactivar" {# Cambié el texto a "Desactivar" para ser más preciso con el cambio de estado #}
+                                        aria-label="Desactivar empleado {{ empleado.nombre }}"
+                                        onclick="return confirm('¿Está seguro que desea desactivar este empleado?')">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            {% endif %}
+                        </form>
                       </div>
                     </td>
                   </tr>
