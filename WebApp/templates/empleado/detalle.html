@@ -27,11 +27,6 @@
       font-size: 1.1rem;
       color: #212529;
     }
-    .price-display { /* Mantengo este estilo por si luego agregas salario, pero no se usará directamente para el "precio" del empleado */
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #28a745;
-    }
     .description-box {
       background: #f8f9fa;
       border-left: 4px solid var(--bs-dark);
@@ -98,66 +93,25 @@
 
           <div class="detail-row">
             <div class="detail-label">
-              <i class="bi bi-credit-card-fill me-2 text-info"></i>DNI
+              <i class="bi bi-file-earmark-person-fill me-2 text-info"></i>Número de Legajo
             </div>
             <div class="detail-value">
-              {{ empleado.dni }}
+              {{ empleado.numero_legajo }}
             </div>
           </div>
 
           <div class="detail-row">
             <div class="detail-label">
-              <i class="bi bi-briefcase-fill me-2 text-success"></i>Cargo
-            </div>
-            <div class="detail-value">
-              {{ empleado.cargo }}
-            </div>
-          </div>
-
-          <div class="detail-row">
-            <div class="detail-label">
-              <i class="bi bi-toggle-on me-2 text-secondary"></i>Estado
+              <i class="bi bi-toggle-on me-2 text-success"></i>Estado
             </div>
             <div class="detail-value">
               {% if empleado.activo %}
-                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i> Activo</span>
+                <span class="badge bg-success">Activo</span>
               {% else %}
-                <span class="badge bg-danger"><i class="bi bi-x-circle me-1"></i> Inactivo</span>
+                <span class="badge bg-danger">Inactivo</span>
               {% endif %}
             </div>
           </div>
-
-          <div class="detail-row">
-            <div class="detail-label">
-              <i class="bi bi-calendar-check me-2 text-warning"></i>Fecha de Alta
-            </div>
-            <div class="detail-value">
-              {{ empleado.fecha_alta|date:"d/m/Y" }}
-            </div>
-          </div>
-
-          {% if empleado.telefono %}
-          <div class="detail-row">
-            <div class="detail-label">
-              <i class="bi bi-phone-fill me-2 text-dark"></i>Teléfono
-            </div>
-            <div class="detail-value">
-              {{ empleado.telefono }}
-            </div>
-          </div>
-          {% endif %}
-
-          {% if empleado.email %}
-          <div class="detail-row">
-            <div class="detail-label">
-              <i class="bi bi-envelope-fill me-2 text-primary"></i>Email
-            </div>
-            <div class="detail-value">
-              {{ empleado.email }}
-            </div>
-          </div>
-          {% endif %}
-
         </div>
 
         <div class="card-footer bg-light">
@@ -194,14 +148,14 @@
                     {% if empleado.activo %}
                       <a class="dropdown-item text-danger" 
                          href="{% url 'WebApp:empleado_cambiar_estado' empleado.id %}"
-                         onclick="return confirm('¿Está seguro que desea dar de baja a este empleado?')">
-                        <i class="bi bi-person-x-fill me-2"></i>Dar de baja
+                         onclick="return confirm('¿Está seguro que desea desactivar este empleado?')">
+                        <i class="bi bi-archive me-2"></i>Desactivar empleado
                       </a>
                     {% else %}
                       <a class="dropdown-item text-success" 
                          href="{% url 'WebApp:empleado_cambiar_estado' empleado.id %}"
-                         onclick="return confirm('¿Está seguro que desea dar de alta a este empleado?')">
-                        <i class="bi bi-person-check-fill me-2"></i>Dar de alta
+                         onclick="return confirm('¿Está seguro que desea activar este empleado?')">
+                        <i class="bi bi-arrow-clockwise me-2"></i>Activar empleado
                       </a>
                     {% endif %}
                   </li>
@@ -218,14 +172,14 @@
             <i class="bi bi-lightbulb me-2"></i>¿Necesitas ayuda?
           </h6>
           <p class="card-text small text-muted mb-3">
-            Desde aquí puedes editar la información del empleado o navegar a otras secciones del sistema.
+            Desde aquí puedes editar la información del empleado o cambiar su estado.
           </p>
           <div class="d-flex flex-wrap justify-content-center gap-2">
             <a href="{% url 'WebApp:empleado_listar' %}" class="btn btn-sm btn-outline-primary">
               <i class="bi bi-list me-1"></i>Ver todos los empleados
             </a>
-            <a href="{% url 'WebApp:reserva_servicio_crear' %}" class="btn btn-sm btn-outline-success">
-              <i class="bi bi-calendar-plus me-1"></i>Crear reserva
+            <a href="{% url 'WebApp:empleado_crear' %}" class="btn btn-sm btn-outline-success">
+              <i class="bi bi-person-plus me-1"></i>Registrar nuevo empleado
             </a>
           </div>
         </div>
