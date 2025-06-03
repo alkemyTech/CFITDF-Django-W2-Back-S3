@@ -1,37 +1,180 @@
-<h1>Listado de Empleados</h1>
+{% extends 'base.html' %}
+{% load static %}
 
-<table border="1">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Número de legajo</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for empleado in listado_empleado %}
-        <tr>
-            <td>{{ empleado.id }}</td>
-            <td>{{ empleado.nombre }}</td>
-            <td>{{ empleado.apellido }}</td>
-            <td>{{ empleado.numero_legajo }}</td>
-            <td>
-                <a href="{% url 'WebApp:empleado_detalle' empleado.id %}">Ver</a>
-                <a href="{% url 'WebApp:empleado_editar' empleado.id %}">Editar</a>
-            {% if listando_inactivos %}
-                <a href="{% url 'WebApp:empleado_cambiar_estado' empleado.id %}">Restaurar</a>
-            {% else %}
-                <a href="{% url 'WebApp:empleado_cambiar_estado' empleado.id %}">Eliminar</a>
-            {% endif %}
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% if listando_inactivos %}
-<p><a href="{% url 'WebApp:empleado_listar' %}">Listar activos</a></p>
-{% else %}
-<p><a href="{% url 'WebApp:empleado_listar_inactivos' %}">Listar inactivos</a></p>
-{% endif %}
+{% block titulo %}
+  {% if listando_inactivos %}
+    Empleados Inactivos - Sistema de Reservas
+  {% else %}
+    Empleados - Sistema de Reservas
+  {% endif %}
+{% endblock %}
+
+{% block head_extra %}
+  <style>
+    .card-header {
+      background-color: var(--bs-dark);
+      color: white;
+    }
+
+    .table-actions a {
+      margin: 0 2px;
+    }
+
+    .btn-sm {
+      font-size: 0.8rem;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #6c757d;
+    }
+
+    .empty-state i {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+  </style>
+{% endblock %}
+
+{% block contenido %}
+<div class="container-fluid mt-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-xl-10">
+      <div class="card shadow-sm">
+        <div class="card-header">
+          <div class="d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">
+              <i class="bi bi-person-badge-fill me-2"></i>
+              {% if listando_inactivos %}
+                Empleados Inactivos
+              {% else %}
+                Listado de Empleados
+              {% endif %}
+            </h3>
+            <div class="btn-group" role="group">
+              {% if listando_inactivos %}
+                <a href="{% url 'WebApp:empleado_listar' %}" class="btn btn-outline-light btn-sm">
+                  <i class="bi bi-list me-1"></i>Ver Activos
+                </a>
+              {% else %}
+                <a href="{% url 'WebApp:empleado_listar_inactivos' %}" class="btn btn-outline-light btn-sm">
+                  <i class="bi bi-archive me-1"></i>Ver Inactivos
+                </a>
+              {% endif %}
+              <a href="{% url 'WebApp:empleado_crear' %}" class="btn btn-light btn-sm">
+                <i class="bi bi-plus-circle me-1"></i>Nuevo Empleado
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card-body p-0">
+          {% if listado_empleado %}
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead class="table-light">
+                  <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Número de Legajo</th>
+                    <th scope="col" class="text-center" style="width: 200px;">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for empleado in listado_empleado %}
+                  <tr>
+                    <td>{{ empleado.nombre }}</td>
+                    <td>{{ empleado.apellido }}</td> 
+                    <td>{{ empleado.numero_legajo }}</td>
+                    <td class="text-center table-actions">
+                        <div class="btn-group btn-group-sm" role="group">
+                            <a href="{% url 'WebApp:empleado_detalle' empleado.id %}"
+                            class="btn btn-outline-primary" 
+                            title="Ver detalles"
+                            aria-label="Ver detalles del empleado {{ empleado.nombre }}">
+                            <i class="bi bi-eye"></i>
+                        </a>
+                        <a href="{% url 'WebApp:empleado_editar' empleado.id %}"
+                        class="btn btn-outline-secondary"
+                        title="Editar"
+                        aria-label="Editar empleado {{ empleado.nombre }}">
+                        <i class="bi bi-pencil"></i>
+                        </a
+                        {% if listando_inactivos %}
+                          <a href="{% url 'WebApp:empleado_cambiar_estado' empleado.id %}" 
+                               class="btn btn-outline-success" 
+                               title="Restaurar"
+                               aria-label="Restaurar empleado {{ empleado.nombre }}"
+                               onclick="return confirm('¿Está seguro que desea restaurar este empleado?')">
+                            <i class="bi bi-arrow-clockwise"></i>
+                          </a>
+                        {% else %}
+                          <a href="{% url 'WebApp:empleado_cambiar_estado' empleado.id %}" 
+                               class="btn btn-outline-danger" 
+                               title="Eliminar"
+                               aria-label="Eliminar empleado {{ empleado.nombre }}"
+                               onclick="return confirm('¿Está seguro que desea eliminar este empleado?')">
+                            <i class="bi bi-trash"></i>
+                          </a>
+                        {% endif %}
+                      </div>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          {% else %}
+            <div class="empty-state">
+              <i class="bi bi-inbox"></i>
+              <h4>
+                {% if listando_inactivos %}
+                  No hay empleados inactivos
+                {% else %}
+                  No hay empleados registrados
+                {% endif %}
+              </h4>
+              <p class="mb-3">
+                {% if listando_inactivos %}
+                  Todos los empleados están actualmente activos.
+                {% else %}
+                  Comience agregando un nuevo empleado al sistema.
+                {% endif %}
+              </p>
+              {% if not listando_inactivos %}
+                <a href="{% url 'WebApp:empleado_crear' %}" class="btn btn-primary">
+                  <i class="bi bi-plus-circle me-2"></i>Crear Primer Empleado
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+        
+        {% if listado_empleado %}
+        <div class="card-footer bg-light">
+          <div class="d-flex justify-content-between align-items-center">
+            <small class="text-muted">
+              Total: {{ listado_empleado|length }} empleado{{ listado_empleado|length|pluralize }}
+              {% if listando_inactivos %}inactivo{{ listado_empleado|length|pluralize }}{% endif %}
+            </small>
+            <div class="btn-group btn-group-sm">
+              {% if listando_inactivos %}
+                <a href="{% url 'WebApp:empleado_listar' %}" class="btn btn-outline-primary">
+                  <i class="bi bi-list me-1"></i>Ver Empleados Activos
+                </a>
+              {% else %}
+                <a href="{% url 'WebApp:empleado_listar_inactivos' %}" class="btn btn-outline-secondary">
+                  <i class="bi bi-archive me-1"></i>Ver Empleados Inactivos
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
