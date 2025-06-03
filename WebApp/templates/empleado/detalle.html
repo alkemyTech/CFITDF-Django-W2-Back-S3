@@ -1,22 +1,236 @@
-<h1>Detalle de Empleado</h1>
+{% extends 'base.html' %}
+{% load static %}
 
-<table border="1">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Número de legajo</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>{{ empleado.id }}</td>
-            <td>{{ empleado.nombre }}</td>
-            <td>{{ empleado.apellido }}</td>
-            <td>{{ empleado.numero_legajo }}</td>
-        </tr>
-    </tbody>
-</table>
+{% block titulo %}
+  Detalle del Empleado: {{ empleado.nombre }} {{ empleado.apellido }} - Sistema de Reservas
+{% endblock %}
 
-<p><a href="{% url 'WebApp:empleado_listar' %}">Listado de empleados</a></p>
+{% block head_extra %}
+  <style>
+    .card-header {
+      background-color: var(--bs-dark);
+      color: white;
+    }
+    .detail-row {
+      padding: 1rem 0;
+      border-bottom: 1px solid #e9ecef;
+    }
+    .detail-row:last-child {
+      border-bottom: none;
+    }
+    .detail-label {
+      font-weight: 600;
+      color: #495057;
+      margin-bottom: 0.5rem;
+    }
+    .detail-value {
+      font-size: 1.1rem;
+      color: #212529;
+    }
+    .price-display { /* Mantengo este estilo por si luego agregas salario, pero no se usará directamente para el "precio" del empleado */
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #28a745;
+    }
+    .description-box {
+      background: #f8f9fa;
+      border-left: 4px solid var(--bs-dark);
+      padding: 1rem;
+      border-radius: 0.25rem;
+      margin-top: 0.5rem;
+    }
+    .action-buttons {
+      gap: 0.5rem;
+    }
+    .btn-back {
+      background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+      border: none;
+      color: white;
+    }
+    .btn-back:hover {
+      background: linear-gradient(135deg, #5a6268 0%, #343a40 100%);
+      color: white;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+  </style>
+{% endblock %}
+
+{% block contenido %}
+<div class="container-fluid mt-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-8 col-xl-6">
+      <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'WebApp:home' %}" class="text-decoration-none">
+              <i class="bi bi-house-fill me-1"></i>Inicio
+            </a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'WebApp:empleado_listar' %}" class="text-decoration-none">
+              <i class="bi bi-person-badge-fill me-1"></i>Empleados
+            </a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Detalle</li>
+        </ol>
+      </nav>
+
+      <div class="card shadow-sm">
+        <div class="card-header">
+          <div class="d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">
+              <i class="bi bi-info-circle-fill me-2"></i>
+              Detalle del Empleado
+            </h3>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div class="detail-row">
+            <div class="detail-label">
+              <i class="bi bi-person-fill me-2 text-primary"></i>Nombre Completo
+            </div>
+            <div class="detail-value">
+              {{ empleado.nombre }} {{ empleado.apellido }}
+            </div>
+          </div>
+
+          <div class="detail-row">
+            <div class="detail-label">
+              <i class="bi bi-credit-card-fill me-2 text-info"></i>DNI
+            </div>
+            <div class="detail-value">
+              {{ empleado.dni }}
+            </div>
+          </div>
+
+          <div class="detail-row">
+            <div class="detail-label">
+              <i class="bi bi-briefcase-fill me-2 text-success"></i>Cargo
+            </div>
+            <div class="detail-value">
+              {{ empleado.cargo }}
+            </div>
+          </div>
+
+          <div class="detail-row">
+            <div class="detail-label">
+              <i class="bi bi-toggle-on me-2 text-secondary"></i>Estado
+            </div>
+            <div class="detail-value">
+              {% if empleado.activo %}
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i> Activo</span>
+              {% else %}
+                <span class="badge bg-danger"><i class="bi bi-x-circle me-1"></i> Inactivo</span>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="detail-row">
+            <div class="detail-label">
+              <i class="bi bi-calendar-check me-2 text-warning"></i>Fecha de Alta
+            </div>
+            <div class="detail-value">
+              {{ empleado.fecha_alta|date:"d/m/Y" }}
+            </div>
+          </div>
+
+          {% if empleado.telefono %}
+          <div class="detail-row">
+            <div class="detail-label">
+              <i class="bi bi-phone-fill me-2 text-dark"></i>Teléfono
+            </div>
+            <div class="detail-value">
+              {{ empleado.telefono }}
+            </div>
+          </div>
+          {% endif %}
+
+          {% if empleado.email %}
+          <div class="detail-row">
+            <div class="detail-label">
+              <i class="bi bi-envelope-fill me-2 text-primary"></i>Email
+            </div>
+            <div class="detail-value">
+              {{ empleado.email }}
+            </div>
+          </div>
+          {% endif %}
+
+        </div>
+
+        <div class="card-footer bg-light">
+          <div class="d-flex flex-wrap action-buttons justify-content-between align-items-center">
+            <div class="d-flex flex-wrap action-buttons">
+              <a href="{% url 'WebApp:empleado_listar' %}" class="btn btn-back">
+                <i class="bi bi-arrow-left me-2"></i>Volver al listado
+              </a>
+            </div>
+            
+            <div class="d-flex flex-wrap action-buttons">
+              <a href="{% url 'WebApp:empleado_editar' empleado.id %}" 
+                 class="btn btn-outline-primary"
+                 aria-label="Editar empleado {{ empleado.nombre }}">
+                <i class="bi bi-pencil me-2"></i>Editar
+              </a>
+              
+              <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle" 
+                        type="button" 
+                        id="dropdownMenuButton" 
+                        data-bs-toggle="dropdown" 
+                        aria-expanded="false">
+                  <i class="bi bi-three-dots me-2"></i>Más acciones
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li>
+                    <a class="dropdown-item" href="{% url 'WebApp:empleado_crear' %}">
+                      <i class="bi bi-plus-circle me-2"></i>Crear nuevo empleado
+                    </a>
+                  </li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li>
+                    {% if empleado.activo %}
+                      <a class="dropdown-item text-danger" 
+                         href="{% url 'WebApp:empleado_cambiar_estado' empleado.id %}"
+                         onclick="return confirm('¿Está seguro que desea dar de baja a este empleado?')">
+                        <i class="bi bi-person-x-fill me-2"></i>Dar de baja
+                      </a>
+                    {% else %}
+                      <a class="dropdown-item text-success" 
+                         href="{% url 'WebApp:empleado_cambiar_estado' empleado.id %}"
+                         onclick="return confirm('¿Está seguro que desea dar de alta a este empleado?')">
+                        <i class="bi bi-person-check-fill me-2"></i>Dar de alta
+                      </a>
+                    {% endif %}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mt-4 border-0 bg-light">
+        <div class="card-body text-center">
+          <h6 class="card-title text-muted mb-3">
+            <i class="bi bi-lightbulb me-2"></i>¿Necesitas ayuda?
+          </h6>
+          <p class="card-text small text-muted mb-3">
+            Desde aquí puedes editar la información del empleado o navegar a otras secciones del sistema.
+          </p>
+          <div class="d-flex flex-wrap justify-content-center gap-2">
+            <a href="{% url 'WebApp:empleado_listar' %}" class="btn btn-sm btn-outline-primary">
+              <i class="bi bi-list me-1"></i>Ver todos los empleados
+            </a>
+            <a href="{% url 'WebApp:reserva_servicio_crear' %}" class="btn btn-sm btn-outline-success">
+              <i class="bi bi-calendar-plus me-1"></i>Crear reserva
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
