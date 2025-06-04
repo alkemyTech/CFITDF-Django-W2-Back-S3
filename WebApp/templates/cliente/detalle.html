@@ -1,22 +1,177 @@
-<h1>Detalle Cliente</h1>
+{% extends 'base.html' %}
+{% load static %}
 
-<table border="1">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Activo</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>{{ cliente.id }}</td>
-            <td>{{ cliente.nombre }}</td>
-            <td>{{ cliente.apellido }}</td>
-            <td>{{ cliente.activo }}</td>
-        </tr>
-    </tbody>
-</table>
+{% block titulo %}
+  Detalle del Cliente: {{ cliente.nombre }} - Sistema de Reservas
+{% endblock %}
 
-<p><a href="{% url 'WebApp:cliente_listar' %}">Listado de clientes</a></p>
+{% block head_extra %}
+  <style>
+    .card-header {
+      background-color: var(--bs-dark);
+      color: white;
+    }
+    .detail-row {
+      padding: 1rem 0;
+      border-bottom: 1px solid #e9ecef;
+    }
+    .detail-row:last-child {
+      border-bottom: none;
+    }
+    .detail-label {
+      font-weight: 600;
+      color: #495057;
+      margin-bottom: 0.5rem;
+    }
+    .detail-value {
+      font-size: 1.1rem;
+      color: #212529;
+    }
+    .action-buttons {
+      gap: 0.5rem;
+    }
+    .btn-back {
+      background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+      border: none;
+      color: white;
+    }
+    .btn-back:hover {
+      background: linear-gradient(135deg, #5a6268 0%, #343a40 100%);
+      color: white;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+  </style>
+{% endblock %}
+
+{% block contenido %}
+<div class="container-fluid mt-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-8 col-xl-6">
+      <!-- Breadcrumb -->
+      <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'WebApp:home' %}" class="text-decoration-none">
+              <i class="bi bi-house-fill me-1"></i>Inicio
+            </a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'WebApp:cliente_listar' %}" class="text-decoration-none">
+              <i class="bi bi-gear-fill me-1"></i>Servicios
+            </a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Detalle</li>
+        </ol>
+      </nav>
+
+      <!-- Card Principal -->
+      <div class="card shadow-sm">
+        <div class="card-header">
+          <div class="d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">
+              <i class="bi bi-info-circle-fill me-2"></i>
+              Detalle del Cliente
+            </h3>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <!-- Nombre del Cliente -->
+          <div class="detail-row">
+            <div class="detail-label">
+              <i class="bi bi-tag-fill me-2 text-primary"></i>Nombre del Cliente
+            </div>
+            <div class="detail-value">
+              {{ cliente.nombre }}
+            </div>
+          </div>
+
+          <!-- Descripción -->
+          <div class="detail-row">
+            <div class="detail-label">
+              <i class="bi bi-tag-fill me-2 text-primary"></i>Apellido
+            </div>
+            <div class="detail-value">
+              {{ cliente.apellido }}
+            </div>
+          </div>
+          <!-- Precio -->
+          <div class="detail-row">
+            <div class="detail-label">
+              <i class="bi bi-currency-dollar me-2 text-success"></i>Precio
+            </div>
+            <div class="price-display">
+              $ {{ servicio.precio }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer con acciones -->
+        <div class="card-footer bg-light">
+          <div class="d-flex flex-wrap action-buttons justify-content-between align-items-center">
+            <div class="d-flex flex-wrap action-buttons">
+              <a href="{% url 'WebApp:cliente_listar' %}" class="btn btn-back">
+                <i class="bi bi-arrow-left me-2"></i>Volver al listado
+              </a>
+            </div>
+            
+            <div class="d-flex flex-wrap action-buttons">
+              <a href="{% url 'WebApp:cliente_editar' cliente.id %}" 
+                 class="btn btn-outline-primary"
+                 aria-label="Editar servicio {{ cliente.nombre }}">
+                <i class="bi bi-pencil me-2"></i>Editar
+              </a>
+              
+              <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle" 
+                        type="button" 
+                        id="dropdownMenuButton" 
+                        data-bs-toggle="dropdown" 
+                        aria-expanded="false">
+                  <i class="bi bi-three-dots me-2"></i>Más acciones
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li>
+                    <a class="dropdown-item" href="{% url 'WebApp:cliente_crear' %}">
+                      <i class="bi bi-plus-circle me-2"></i>Crear nuevo servicio
+                    </a>
+                  </li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li>
+                    <a class="dropdown-item text-danger" 
+                       href="{% url 'WebApp:cliente_cambiar_estado' cliente.id %}"
+                       onclick="return confirm('¿Está seguro que desea eliminar este servicio?')">
+                      <i class="bi bi-trash me-2"></i>Eliminar servicio
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card de información adicional -->
+      <div class="card mt-4 border-0 bg-light">
+        <div class="card-body text-center">
+          <h6 class="card-title text-muted mb-3">
+            <i class="bi bi-lightbulb me-2"></i>¿Necesitas ayuda?
+          </h6>
+          <p class="card-text small text-muted mb-3">
+            Desde aquí puedes editar la información del servicio o navegar a otras secciones del sistema.
+          </p>
+          <div class="d-flex flex-wrap justify-content-center gap-2">
+            <a href="{% url 'WebApp:cliente_listar' %}" class="btn btn-sm btn-outline-primary">
+              <i class="bi bi-list me-1"></i>Ver todos los servicios
+            </a>
+            <a href="{% url 'WebApp:reserva_servicio_crear' %}" class="btn btn-sm btn-outline-success">
+              <i class="bi bi-calendar-plus me-1"></i>Crear reserva
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
