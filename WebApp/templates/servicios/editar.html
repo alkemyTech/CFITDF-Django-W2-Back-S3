@@ -11,10 +11,6 @@
       background-color: var(--bs-dark);
       color: white;
     }
-    /* Estilos adicionales para los campos del formulario si es necesario */
-    .form-control {
-      margin-bottom: 1rem;
-    }
     .btn-primary {
       background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
       border: none;
@@ -56,7 +52,18 @@
             {% for field in form %}
               <div class="mb-3">
                 <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-                {{ field }}
+                
+                {% if field.name == 'activo' and not form.instance.pk %}
+                  <input type="checkbox" name="{{ field.name }}" id="{{ field.id_for_label }}" checked disabled>
+                {% elif field.name == 'precio' %}
+                  <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="number" class="form-control" name="{{ field.name }}" id="{{ field.id_for_label }}" value="{{ field.value|default_if_none:'' }}" min="0" required>
+                  </div>
+                {% else %}
+                  {{ field }}
+                {% endif %}
+
                 {% if field.help_text %}
                   <div class="form-text text-muted">{{ field.help_text }}</div>
                 {% endif %}
@@ -88,4 +95,18 @@
     </div>
   </div>
 </div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const formElements = document.querySelectorAll('form input, form textarea');
+
+    formElements.forEach(function (el) {
+      el.classList.add('form-control');
+
+      if (el.type === 'checkbox') {
+        el.classList.remove('form-control'); // no aplica para el check
+        el.classList.add('form-check-input');
+      }
+    });
+  });
+</script>
 {% endblock %}
