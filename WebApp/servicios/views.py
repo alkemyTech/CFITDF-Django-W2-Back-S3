@@ -13,7 +13,7 @@ def home(request):
 # Servicios
 class ServicioCreateView(CreateView):
     model = Servicio
-    template_name = 'editar.html'
+    template_name = 'servicios/editar.html'
     fields = '__all__'
     success_url = reverse_lazy('WebApp:servicio_listar')
 
@@ -53,7 +53,7 @@ class ServicioListView(ListView):
 
 class ServicioUpdateView(UpdateView):
     model = Servicio
-    template_name = 'editar.html'
+    template_name = 'servicios/editar.html'
     fields = '__all__'
     success_url = reverse_lazy('WebApp:servicio_listar')
 
