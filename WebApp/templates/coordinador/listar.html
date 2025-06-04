@@ -161,7 +161,7 @@
         <div class="card-footer bg-light">
           <div class="d-flex justify-content-between align-items-center">
             <small class="text-muted">
-              Total: {{ listado_coordinador|length }} coordinador{{ listado_coordinador|length|pluralize }}
+              Total: {{ listado_coordinador|length }} coordinador{{ listado_coordinador|length|pluralize:"es" }}
               {% if listando_inactivos %}inactivo{{ listado_coordinador|length|pluralize }}{% endif %}
             </small>
             <div class="btn-group btn-group-sm">
