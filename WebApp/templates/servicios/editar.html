@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+  {{ titulo_vista }} - Sistema de Reservas
+{% endblock %}
+
+{% block head_extra %}
+  <style>
+    .card-header {
+      background-color: var(--bs-dark);
+      color: white;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+      border: none;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      background: linear-gradient(135deg, #0056b3 0%, #007bff 100%);
+    }
+    .btn-back {
+      background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+      border: none;
+      color: white;
+    }
+    .btn-back:hover {
+      background: linear-gradient(135deg, #5a6268 0%, #343a40 100%);
+      color: white;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+  </style>
+{% endblock %}
+
+{% block contenido %}
+<div class="container-fluid mt-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-8 col-xl-6">
+      <div class="card shadow-sm">
+        <div class="card-header">
+          <h3 class="mb-0">
+            <i class="bi bi-pencil-square me-2"></i> {{ titulo_vista }}
+          </h3>
+        </div>
+        
+        <div class="card-body">
+          <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+              <div class="mb-3">
+                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                
+                {% if field.name == 'activo' and not form.instance.pk %}
+                  <input type="checkbox" name="{{ field.name }}" id="{{ field.id_for_label }}" checked disabled>
+                {% elif field.name == 'precio' %}
+                  <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="number" class="form-control" name="{{ field.name }}" id="{{ field.id_for_label }}" value="{{ field.value|default_if_none:'' }}" min="0" required>
+                  </div>
+                {% else %}
+                  {{ field }}
+                {% endif %}
+
+                {% if field.help_text %}
+                  <div class="form-text text-muted">{{ field.help_text }}</div>
+                {% endif %}
+                {% for error in field.errors %}
+                  <div class="invalid-feedback d-block">{{ error }}</div>
+                {% endfor %}
+              </div>
+            {% endfor %}
+
+            {% if form.non_field_errors %}
+              <div class="alert alert-danger" role="alert">
+                {% for error in form.non_field_errors %}
+                  {{ error }}
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <div class="d-flex justify-content-between align-items-center mt-4">
+              <a href="javascript:history.back()" class="btn btn-back">
+                <i class="bi bi-arrow-left me-2"></i>Volver
+              </a>
+              <button type="submit" class="btn btn-primary">
+                <i class="bi bi-check-circle me-2"></i>Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const formElements = document.querySelectorAll('form input, form textarea');
+
+    formElements.forEach(function (el) {
+      el.classList.add('form-control');
+
+      if (el.type === 'checkbox') {
+        el.classList.remove('form-control'); // no aplica para el check
+        el.classList.add('form-check-input');
+      }
+    });
+  });
+</script>
+{% endblock %}
