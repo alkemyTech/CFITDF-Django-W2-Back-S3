@@ -28,45 +28,58 @@
             initialView: 'dayGridMonth',
             locale: 'es',
             buttonText: {
-            today: 'Hoy',
-            month: 'Mes',
-            week: 'Semana',
-            day: 'Día',
-            list: 'Lista'
+                today: 'Hoy',
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+                list: 'Lista'
             },
             events: '/api/eventos/',
             eventClick: function(info) {
-                var idReserva = info.event.id; // asumí que cada evento tiene un id
+                var idReserva = info.event.id;
                 window.location.href = `/reserva_servicio/${idReserva}/`;
             },
             eventDidMount: function(info) {
-            // Agregar tooltip con el título y fechas
-            tippy(info.el, {
-                content: `
-                <strong>${info.event.title}</strong><br/>
-                Inicio: ${info.event.start.toLocaleString()}<br/>
-                ${info.event.end ? "Fin: " + info.event.end.toLocaleString() : ""}
-                `,
-                allowHTML: true,
-                theme: 'dark',
-                animation: 'scale',
-                delay: [100, 100],
-            });
+                // Agregar tooltip con el título y fechas
+                tippy(info.el, {
+                    content: `
+                    <strong>${info.event.title}</strong><br/>
+                    Inicio: ${info.event.start.toLocaleString()}<br/>
+                    ${info.event.end ? "Fin: " + info.event.end.toLocaleString() : ""}
+                    `,
+                    allowHTML: true,
+                    theme: 'dark',
+                    animation: 'scale',
+                    delay: [100, 100],
+                });
 
-            // Efecto hover animado con CSS (opcional, para mejorar)
-            info.el.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
-            info.el.addEventListener('mouseenter', () => {
-                info.el.style.transform = 'scale(1.05)';
-                info.el.style.boxShadow = '0 0 15px rgba(13, 110, 253, 0.9)';
-            });
-            info.el.addEventListener('mouseleave', () => {
-                info.el.style.transform = 'scale(1)';
-                info.el.style.boxShadow = 'none';
-            });
+                // Efecto hover animado con CSS (opcional, para mejorar)
+                info.el.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+                info.el.addEventListener('mouseenter', () => {
+                    info.el.style.transform = 'scale(1.05)';
+                    info.el.style.boxShadow = '0 0 15px rgba(13, 110, 253, 0.9)';
+                });
+                info.el.addEventListener('mouseleave', () => {
+                    info.el.style.transform = 'scale(1)';
+                    info.el.style.boxShadow = 'none';
+                });
+            },
+            datesSet: function() {
+                setTimeout(() => {
+                    document.querySelectorAll('.fc-daygrid-day').forEach(dayCell => {
+                        const events = dayCell.querySelectorAll('.fc-event');
+                        if (events.length === 0) {
+                            dayCell.style.backgroundColor = '#e6f9e6'; // verde clarito
+                        } else {
+                            dayCell.style.backgroundColor = ''; // Limpiar si hay eventos
+                        }
+                    });
+                }, 50);
             }
         });
         calendar.render();
     });
+
 
     </script>
 {% endblock %}
