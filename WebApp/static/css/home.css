@@ -2,34 +2,85 @@ body {
   background-color: #121212;
   color: #f1f1f1;
 }
+
 .card-home {
   height: 170px;
   background-color: #1e1e1e;
   border: 1px solid #333;
   color: #f1f1f1;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
   cursor: pointer;
   user-select: none;
 }
-.card-home:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(0, 123, 255, 0.6);
-  background-color: #272727;
-}
-.card-home:hover i,
-.card-home:hover div {
-  color: #0d6efd;
-  transition: color 0.3s ease;
-}
+
 .card-home div {
   font-size: 1.15rem;
   line-height: 1.4;
   font-weight: 600;
 }
+
+.card-home i {
+  font-size: 2rem;
+}
+
+/* Servicios - Azul */
+.card-servicios:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(13, 110, 253, 0.6);
+  background-color: rgba(13, 110, 253, 0.1);
+}
+.card-servicios:hover i,
+.card-servicios:hover div {
+  color: #0954c4;
+}
+
+/* Clientes - Verde */
+.card-clientes:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(40, 167, 69, 0.6);
+  background-color: rgba(40, 167, 69, 0.1);
+}
+.card-clientes:hover i,
+.card-clientes:hover div {
+  color: #28a745;
+}
+
+/* Empleados - Amarillo */
+.card-empleados:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 193, 7, 0.6);
+  background-color: rgba(255, 193, 7, 0.1);
+}
+.card-empleados:hover i,
+.card-empleados:hover div {
+  color: #ffc107;
+}
+
+/* Coordinadores - Rojo */
+.card-coordinadores:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(220, 53, 69, 0.6);
+  background-color: rgba(220, 53, 69, 0.1);
+}
+.card-coordinadores:hover i,
+.card-coordinadores:hover div {
+  color: #dc3545;
+}
+
+/* Reservas - Cian */
+.card-reservas:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(23, 162, 184, 0.6);
+  background-color: rgba(23, 162, 184, 0.1);
+}
+.card-reservas:hover i,
+.card-reservas:hover div {
+  color: #17a2b8;
+}
+
+/* Accesibilidad */
 a:focus .card-home {
   outline: 3px solid #0d6efd;
   outline-offset: 3px;
 }
-.card-home i {
-  font-size: 2rem;
-}
+

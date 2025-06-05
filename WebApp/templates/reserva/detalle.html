@@ -6,55 +6,9 @@
 {% endblock %}
 
 {% block head_extra %}
-  <style>
-    .card-header {
-      background-color: var(--bs-dark);
-      color: white;
-    }
-    .detail-row {
-      padding: 1rem 0;
-      border-bottom: 1px solid #e9ecef;
-    }
-    .detail-row:last-child {
-      border-bottom: none;
-    }
-    .detail-label {
-      font-weight: 600;
-      color: #495057;
-      margin-bottom: 0.5rem;
-    }
-    .detail-value {
-      font-size: 1.1rem;
-      color: #212529;
-    }
-    .price-display {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #28a745;
-    }
-    .description-box {
-      background: #f8f9fa;
-      border-left: 4px solid var(--bs-dark);
-      padding: 1rem;
-      border-radius: 0.25rem;
-      margin-top: 0.5rem;
-    }
-    .action-buttons {
-      gap: 0.5rem;
-    }
-    .btn-back {
-      background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
-      border: none;
-      color: white;
-    }
-    .btn-back:hover {
-      background: linear-gradient(135deg, #5a6268 0%, #343a40 100%);
-      color: white;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-  </style>
+<link rel="stylesheet" href="{% static 'css/reserva/detalle.css' %}">
 {% endblock %}
+
 
 {% block contenido %}
 <div class="container-fluid mt-4">
@@ -92,7 +46,7 @@
           <!-- Fecha Solicitada -->
           <div class="detail-row">
             <div class="detail-label">
-              <i class="bi bi-calendar-date me-2 text-primary"></i>Fecha Solicitada
+              <i class="bi bi-calendar-date me-2" style="color:#17a2b8"></i>Fecha Solicitada
             </div>
             <div class="detail-value">
               {{ reserva_servicio.fecha_solicitada_reserva}}
@@ -101,7 +55,7 @@
            <!-- Servicio -->
           <div class="detail-row">
             <div class="detail-label">
-              <i class="bi bi-gear-fill me-2 text-primary"></i>Servicio
+              <i class="bi bi-gear-fill me-2" style="color:#17a2b8"></i>Servicio
             </div>
             <div class="detail-value">
               {{ reserva_servicio.servicio_solicitado.nombre}}
@@ -110,7 +64,7 @@
            <!-- Cliente -->
           <div class="detail-row">
             <div class="detail-label">
-              <i class="bi bi-people-fill me-2 text-primary"></i>Cliente
+              <i class="bi bi-people-fill me-2" style="color:#17a2b8"></i>Cliente
             </div>
             <div class="detail-value">
               {{ reserva_servicio.cliente.nombre}}
@@ -119,7 +73,7 @@
            <!-- Empleado -->
           <div class="detail-row">
             <div class="detail-label">
-              <i class="bi bi-person-workspace me-2 text-primary"></i>Empleado
+              <i class="bi bi-person-workspace me-2" style="color:#17a2b8"></i>Empleado
             </div>
             <div class="detail-value">
               {{ reserva_servicio.empleado_encargado.nombre}}
@@ -128,12 +82,13 @@
            <!-- Coordinador -->
           <div class="detail-row">
             <div class="detail-label">
-              <i class="bi bi-person-lines-fill me-2 text-primary"></i>Coordinador
+              <i class="bi bi-person-lines-fill me-2" style="color:#17a2b8"></i>Coordinador
             </div>
             <div class="detail-value">
               {{ reserva_servicio.coordinador_asignado.nombre}}
             </div>
           </div>
+        </div>  
         <!-- Footer con acciones -->
         <div class="card-footer bg-light">
           <div class="d-flex flex-wrap action-buttons justify-content-between align-items-center">
@@ -166,7 +121,7 @@
                   </li>
                   <li><hr class="dropdown-divider"></li>
                   <li>
-                    <a class="dropdown-item text-dange" href="{% url 'WebApp:reserva_servicio_borrar' reserva_servicio.id %}">
+                    <a class="dropdown-item text-danger" href="{% url 'WebApp:reserva_servicio_borrar' reserva_servicio.id %}">
                         <i class="bi bi-trash me-2"></i>Eliminar reserva
                     </a>
                   </li>
@@ -200,3 +155,4 @@
   </div>
 </div>
 {% endblock %}
+
