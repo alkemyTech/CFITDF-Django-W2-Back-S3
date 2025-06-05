@@ -106,7 +106,7 @@ class ClienteListView(ListView):
       
 class ClienteUpdateView(UpdateView):
     model = Cliente
-    template_name = 'editar.html'
+    template_name = 'cliente/editar.html'
     fields = '__all__'
     success_url = reverse_lazy('WebApp:cliente_listar')
 
