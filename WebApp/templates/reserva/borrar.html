@@ -1,7 +1,63 @@
-<h1>Confirmar Borrado Reserva</h1>
+{% extends 'base.html' %}
+{% load static %}
 
-<form method="post"> {% csrf_token %}
-    <p>Estas seguro de borrar {{object}}</p>
-    {{form}}
-    <input type="submit" value="Confirmar">
-</form>
+{% block titulo %}
+  Confirmar Eliminación Reserva - Sistema de Reservas
+{% endblock %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="{% static 'css/reserva/editar.css' %}">
+{% endblock %}
+
+{% block contenido %}
+<div class="container-fluid mt-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-8 col-xl-6">
+      <div class="card shadow-sm">
+        <div class="card-header">
+          <h3 class="mb-0">
+            <i class="bi bi-trash me-2 text-danger"></i> Confirmar Eliminación Reserva
+          </h3>
+        </div>
+
+        <div class="card-body">
+            <p class="lead">
+                ¿Estás seguro de que deseas eliminar la reserva: <strong>{{ object }}</strong>?
+            </p>
+
+            <alert>Esta accion no podra ser revertida.</alert>
+
+          <form method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            {{ form }}
+            <div class="d-flex justify-content-between align-items-center mt-4">
+              <a href="javascript:history.back()" class="btn btn-back">
+                <i class="bi bi-arrow-left me-2"></i> Volver
+              </a>
+              <button type="submit" class="btn btn-danger">
+                <i class="bi bi-check-circle me-2"></i> Confirmar Eliminación
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const formElements = document.querySelectorAll('form input, form textarea');
+
+    formElements.forEach(function (el) {
+      el.classList.add('form-control');
+
+      if (el.type === 'checkbox') {
+        el.classList.remove('form-control');
+        el.classList.add('form-check-input');
+      }
+    });
+  });
+</script>
+{% endblock %}

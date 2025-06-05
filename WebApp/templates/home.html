@@ -5,18 +5,18 @@
   WebApp Reservas de Servicios
 {% endblock %}
 
-
 {% block head_extra %}
-  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock %}
 
 {% block contenido %}
 <div class="container-fluid text-center mt-5">
   <h1 class="mb-5">Bienvenido al Sistema de Reservas</h1>
   <div class="row g-4 justify-content-center px-3">
+    
     <div class="col-12 col-sm-6 col-md-4 col-lg-2">
       <a href="{% url 'WebApp:servicio_listar' %}" class="text-decoration-none" aria-label="Listado de servicios">
-        <div class="card card-home d-flex align-items-center justify-content-center">
+        <div class="card card-home card-servicios d-flex align-items-center justify-content-center">
           <div>
             <i class="bi bi-gear-fill mb-2"></i><br>
             Servicios
@@ -24,9 +24,10 @@
         </div>
       </a>
     </div>
+
     <div class="col-12 col-sm-6 col-md-4 col-lg-2">
       <a href="{% url 'WebApp:cliente_listar' %}" class="text-decoration-none" aria-label="Listado de clientes">
-        <div class="card card-home d-flex align-items-center justify-content-center">
+        <div class="card card-home card-clientes d-flex align-items-center justify-content-center">
           <div>
             <i class="bi bi-people-fill mb-2"></i><br>
             Clientes
@@ -34,9 +35,10 @@
         </div>
       </a>
     </div>
+
     <div class="col-12 col-sm-6 col-md-4 col-lg-2">
       <a href="{% url 'WebApp:empleado_listar' %}" class="text-decoration-none" aria-label="Listado de empleados">
-        <div class="card card-home d-flex align-items-center justify-content-center">
+        <div class="card card-home card-empleados d-flex align-items-center justify-content-center">
           <div>
             <i class="bi bi-person-workspace mb-2"></i><br>
             Empleados
@@ -44,9 +46,10 @@
         </div>
       </a>
     </div>
+
     <div class="col-12 col-sm-6 col-md-4 col-lg-2">
       <a href="{% url 'WebApp:coordinador_listar' %}" class="text-decoration-none" aria-label="Listado de coordinadores">
-        <div class="card card-home d-flex align-items-center justify-content-center">
+        <div class="card card-home card-coordinadores d-flex align-items-center justify-content-center">
           <div>
             <i class="bi bi-person-lines-fill mb-2"></i><br>
             Coordinadores
@@ -54,9 +57,10 @@
         </div>
       </a>
     </div>
+
     <div class="col-12 col-sm-6 col-md-4 col-lg-2">
       <a href="{% url 'WebApp:reserva_servicio_listar' %}" class="text-decoration-none" aria-label="Listado de reservas">
-        <div class="card card-home d-flex align-items-center justify-content-center">
+        <div class="card card-home card-reservas d-flex align-items-center justify-content-center">
           <div>
             <i class="bi bi-calendar-check-fill mb-2"></i><br>
             Reservas
@@ -64,6 +68,7 @@
         </div>
       </a>
     </div>
+
   </div>
 </div>
 {% endblock %}
