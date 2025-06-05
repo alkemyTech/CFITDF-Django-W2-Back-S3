@@ -1,7 +1,8 @@
 #from django.shortcuts import render
+from django.http import JsonResponse
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from .serializers import ServicioSerializer, CoordinadorSerializer, ClienteSerializer, EmpleadoSerializer
-from servicios.models import Servicio, Coordinador, Cliente, Empleado
+from servicios.models import Servicio, Coordinador, Cliente, Empleado, ReservaServicio
 
 # Servicios
 class ServicioListAPIView(ListAPIView):
@@ -61,3 +62,15 @@ class EmpleadoRetrieveAPIView(RetrieveAPIView):
 
     def get_view_name(self):
         return "Detalle de Empleado"
+    
+    
+# Calendario
+def eventos_reservas(request):
+    eventos = []
+    for reserva in ReservaServicio.objects.all():
+        eventos.append({
+            "id": reserva.pk,
+            "title": f"{reserva.servicio_solicitado.nombre} - {reserva.cliente.nombre}",
+            "start": reserva.fecha_solicitada_reserva.isoformat(),
+        })
+    return JsonResponse(eventos, safe=False)

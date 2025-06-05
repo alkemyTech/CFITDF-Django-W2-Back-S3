@@ -3,7 +3,8 @@ from .views import (
     ServicioListAPIView, ServicioRetrieveAPIView, 
     ClienteListApiView, ClienteRetrieveAPIView,
     CoordinadorAPIView, CoordinadorRetriveAPIView,
-    EmpleadoListAPIView, EmpleadoRetrieveAPIView
+    EmpleadoListAPIView, EmpleadoRetrieveAPIView,
+    eventos_reservas
 )
 
 app_name = 'api'
@@ -21,4 +22,6 @@ urlpatterns = [
     # Empleados
     path('empleados/', EmpleadoListAPIView.as_view(), name='empleado_listar'),
     path('empleados/<int:pk>/', EmpleadoRetrieveAPIView.as_view(), name='empleado_detalle'),
+    # Calendario
+    path('eventos/', eventos_reservas, name='eventos_reservas'),
 ]

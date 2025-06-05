@@ -177,7 +177,7 @@ def coordinador_cambiar_estado(request, pk):
 # ReservaServicio
 class ReservaServicioCreateView(CreateView):
     model = ReservaServicio
-    template_name = 'editar.html'
+    template_name = 'reserva/editar.html'
     form_class = ReservaServicioForm 
     success_url = reverse_lazy('WebApp:reserva_servicio_crear')
 
@@ -209,7 +209,7 @@ class ReservaServicioListView(ListView):
 
 class ReservaServicioUpdateView(UpdateView):
     model = ReservaServicio
-    template_name = 'editar.html'
+    template_name = 'reserva/editar.html'
     form_class = ReservaServicioForm 
     success_url = reverse_lazy('WebApp:reserva_servicio_listar')
 
@@ -282,3 +282,8 @@ def empleado_cambiar_estado(request, pk):
     empleado.activo = not empleado.activo
     empleado.save()
     return HttpResponseRedirect(reverse_lazy('WebApp:empleado_listar'))
+
+# Calendario
+
+def calendario(request):
+    return render(request, 'calendario.html')
