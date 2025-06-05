@@ -58,7 +58,7 @@
           </li>
           <li class="breadcrumb-item">
             <a href="{% url 'WebApp:cliente_listar' %}" class="text-decoration-none">
-              <i class="bi bi-gear-fill me-1"></i>Servicios
+              <i class="bi bi-gear-fill me-1"></i>Clientes
             </a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">Detalle</li>
@@ -77,32 +77,32 @@
         </div>
         
         <div class="card-body">
-          <!-- Nombre del Cliente -->
+          <!-- Nombre completo del cliente -->
           <div class="detail-row">
             <div class="detail-label">
-              <i class="bi bi-tag-fill me-2 text-primary"></i>Nombre del Cliente
+              <i class="bi bi-person-fill me-2 text-primary"></i>Nombre Completo
             </div>
             <div class="detail-value">
-              {{ cliente.nombre }}
+              {{ cliente.nombre }} {{ cliente.apellido }}
             </div>
           </div>
 
-          <!-- Descripción -->
+          <!-- Activo -->
           <div class="detail-row">
             <div class="detail-label">
-              <i class="bi bi-tag-fill me-2 text-primary"></i>Apellido
+              {% if cliente.activo %}
+                <i class="bi bi-toggle-on me-2 text-success"></i>
+              {% else %}
+                <i class="bi bi-toggle-on me-2 text-danger"></i>
+              {% endif %}
+              Estado
             </div>
             <div class="detail-value">
-              {{ cliente.apellido }}
-            </div>
-          </div>
-          <!-- Precio -->
-          <div class="detail-row">
-            <div class="detail-label">
-              <i class="bi bi-currency-dollar me-2 text-success"></i>Precio
-            </div>
-            <div class="price-display">
-              $ {{ servicio.precio }}
+              {% if cliente.activo %}
+                <span class="badge bg-success">Activo</span>
+              {% else %}
+                <span class="badge bg-danger">Inactivo</span>
+              {% endif %}
             </div>
           </div>
         </div>
@@ -134,7 +134,7 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <li>
                     <a class="dropdown-item" href="{% url 'WebApp:cliente_crear' %}">
-                      <i class="bi bi-plus-circle me-2"></i>Crear nuevo servicio
+                      <i class="bi bi-plus-circle me-2"></i>Crear nuevo cliente
                     </a>
                   </li>
                   <li><hr class="dropdown-divider"></li>
@@ -142,7 +142,7 @@
                     <a class="dropdown-item text-danger" 
                        href="{% url 'WebApp:cliente_cambiar_estado' cliente.id %}"
                        onclick="return confirm('¿Está seguro que desea eliminar este servicio?')">
-                      <i class="bi bi-trash me-2"></i>Eliminar servicio
+                      <i class="bi bi-trash me-2"></i>Eliminar cliente
                     </a>
                   </li>
                 </ul>
@@ -159,11 +159,11 @@
             <i class="bi bi-lightbulb me-2"></i>¿Necesitas ayuda?
           </h6>
           <p class="card-text small text-muted mb-3">
-            Desde aquí puedes editar la información del servicio o navegar a otras secciones del sistema.
+            Desde aquí puedes editar la información del cliente o navegar a otras secciones del sistema.
           </p>
           <div class="d-flex flex-wrap justify-content-center gap-2">
             <a href="{% url 'WebApp:cliente_listar' %}" class="btn btn-sm btn-outline-primary">
-              <i class="bi bi-list me-1"></i>Ver todos los servicios
+              <i class="bi bi-list me-1"></i>Ver todos los clientes
             </a>
             <a href="{% url 'WebApp:reserva_servicio_crear' %}" class="btn btn-sm btn-outline-success">
               <i class="bi bi-calendar-plus me-1"></i>Crear reserva

@@ -25,6 +25,12 @@
       font-weight: bold;
       color: #28a745;
     }
+    .cliente-apellido {
+      max-width: 300px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
     .empty-state {
       text-align: center;
       padding: 3rem 1rem;
@@ -46,7 +52,7 @@
         <div class="card-header">
           <div class="d-flex justify-content-between align-items-center">
             <h3 class="mb-0">
-              <i class="bi bi-gear-fill me-2"></i>
+              <i class="bi bi-person-bounding-box me-2"></i>
               {% if listando_inactivos %}
                 Clientes inactivos
               {% else %}
@@ -88,17 +94,22 @@
                   <tr>
                     <td class="text-center text-muted fw-bold">{{ cliente.id }}</td>
                     <td>
-                      <div class="fw-semibold">{{ cliente.nombre }}</div>
+                      <div>{{ cliente.nombre }}</div>
+                      <div class="d-md-none">
+                        <small class="text-muted">{{ cliente.apellido|truncatechars:50 }}</small>
+                      </div>
                     </td>
-                    <td>
-                      <div class="fw-semibold">{{ cliente.apellido }}</div>
+                    <td class="d-none d-md-table-cell">
+                      <span class="cliente-apellido" title="{{ cliente.apellido }}">
+                        {{ cliente.apellido }}
+                      </span>
                     </td>
                     <td class="text-end">
                       <span class="price-badge">
                         {% if cliente.activo %}
-                            <p>Si</p>
+                            <p class="text-success">Si</p>
                         {% else %}
-                            <p>No</p>
+                            <p class="text-danger">No</p>
                         {% endif %}
                       </span>
                     </td>
@@ -145,21 +156,21 @@
               <i class="bi bi-inbox"></i>
               <h4>
                 {% if listando_inactivos %}
-                  No hay servicios inactivos
+                  No hay clientes inactivos
                 {% else %}
-                  No hay servicios registrados
+                  No hay clientes registrados
                 {% endif %}
               </h4>
               <p class="mb-3">
                 {% if listando_inactivos %}
-                  Todos los servicios están actualmente activos.
+                  Todos los clientes están actualmente activos.
                 {% else %}
-                  Comience agregando un nuevo servicio al sistema.
+                  Comience agregando un nuevo cliente al sistema.
                 {% endif %}
               </p>
               {% if not listando_inactivos %}
                 <a href="{% url 'WebApp:cliente_crear' %}" class="btn btn-primary">
-                  <i class="bi bi-plus-circle me-2"></i>Crear Primer Servicio
+                  <i class="bi bi-plus-circle me-2"></i>Crear Primer Cliente
                 </a>
               {% endif %}
             </div>
