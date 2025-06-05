@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}Calendario de Reservas{% endblock %}
+{% block head_extra %}
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/calendario.css' %}">
+{% endblock %}
+
+{% block contenido %}
+<div class="container mt-4">
+  <h2>Calendario de Reservas</h2>
+  <div id="calendario"></div>
+</div>
+{% endblock %}
+{% block scripts %}
+    <!-- Tippy.js CSS y JS -->
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/dist/tippy.css" />
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <!-- FullCalendar JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.8/index.global.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.8/locales/es.global.min.js"></script>    <script>
+    
+    document.addEventListener('DOMContentLoaded', function () {
+        const calendarEl = document.getElementById('calendario');
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'es',
+            buttonText: {
+            today: 'Hoy',
+            month: 'Mes',
+            week: 'Semana',
+            day: 'Día',
+            list: 'Lista'
+            },
+            events: '/api/eventos/',
+            eventClick: function(info) {
+                var idReserva = info.event.id; // asumí que cada evento tiene un id
+                window.location.href = `/reserva_servicio/${idReserva}/`;
+            },
+            eventDidMount: function(info) {
+            // Agregar tooltip con el título y fechas
+            tippy(info.el, {
+                content: `
+                <strong>${info.event.title}</strong><br/>
+                Inicio: ${info.event.start.toLocaleString()}<br/>
+                ${info.event.end ? "Fin: " + info.event.end.toLocaleString() : ""}
+                `,
+                allowHTML: true,
+                theme: 'dark',
+                animation: 'scale',
+                delay: [100, 100],
+            });
+
+            // Efecto hover animado con CSS (opcional, para mejorar)
+            info.el.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+            info.el.addEventListener('mouseenter', () => {
+                info.el.style.transform = 'scale(1.05)';
+                info.el.style.boxShadow = '0 0 15px rgba(13, 110, 253, 0.9)';
+            });
+            info.el.addEventListener('mouseleave', () => {
+                info.el.style.transform = 'scale(1)';
+                info.el.style.boxShadow = 'none';
+            });
+            }
+        });
+        calendar.render();
+    });
+
+    </script>
+{% endblock %}
+

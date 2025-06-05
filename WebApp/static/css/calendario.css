@@ -1,0 +1,95 @@
+#calendario {
+  background-color: #f8f9fa;
+  border: 1px solid #adb5bd;
+  border-radius: 10px;
+  color: #343a40;
+  font-family: 'Roboto', sans-serif;
+  padding: 12px;
+}
+
+/* Toolbar */
+.fc-toolbar {
+  background-color: #e9ecef;
+  border-bottom: 2px solid #adb5bd;
+  padding: 10px 15px;
+  color: #343a40;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Botones */
+.fc-button {
+  background-color: #adb5bd;
+  border: 1px solid #6c757d;
+  color: white;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 7px 16px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.fc-button:hover,
+.fc-button:focus {
+  background-color: #6c757d;
+  color: white;
+  box-shadow: 0 0 10px #6c757daa;
+}
+
+/* Cabecera días */
+.fc-col-header-cell-cushion {
+  color: #495057;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+}
+
+/* Día actual (más marcado) */
+.fc-day-today {
+  background-color: #dee2e6 !important;
+  border: 2px solid #495057 !important;
+  border-radius: 8px;
+  color: #212529 !important;
+  font-weight: 700;
+  box-shadow: inset 0 0 4px #6c757d;
+}
+
+/* Eventos */
+.fc-event {
+  background-color: #343a40;
+  border-radius: 10px;
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: 0 0 15px #343a40cc;
+  padding: 5px 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background-color 0.25s ease;
+}
+
+.fc-event:hover {
+  background-color: #495057;
+  box-shadow: 0 0 20px #495057cc;
+}
+
+/* Números días */
+.fc-daygrid-day-number {
+  font-family: 'Roboto', sans-serif;
+  color: #6c757d;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+/* Líneas divisorias más gruesas */
+.fc-scrollgrid td,
+.fc-scrollgrid th {
+  border: 2px solid #adb5bd !important;
+}
+
+.fc-daygrid-day-frame {
+  border-top: 2px solid #adb5bd;
+}
