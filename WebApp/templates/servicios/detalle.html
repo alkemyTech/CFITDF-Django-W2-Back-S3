@@ -6,27 +6,9 @@
 {% endblock %}
 
 {% block head_extra %}
+  <link rel="stylesheet" href="{% static 'css/servicio/colors.css' %}">
+  <link rel="stylesheet" href="{% static 'css/detalle.css' %}">
   <style>
-    .card-header {
-      background-color: var(--bs-dark);
-      color: white;
-    }
-    .detail-row {
-      padding: 1rem 0;
-      border-bottom: 1px solid #e9ecef;
-    }
-    .detail-row:last-child {
-      border-bottom: none;
-    }
-    .detail-label {
-      font-weight: 600;
-      color: #495057;
-      margin-bottom: 0.5rem;
-    }
-    .detail-value {
-      font-size: 1.1rem;
-      color: #212529;
-    }
     .price-display {
       font-size: 1.5rem;
       font-weight: bold;
@@ -34,24 +16,10 @@
     }
     .description-box {
       background: #f8f9fa;
-      border-left: 4px solid var(--bs-dark);
+      border-left: 4px solid var(--card-header-bg);
       padding: 1rem;
       border-radius: 0.25rem;
       margin-top: 0.5rem;
-    }
-    .action-buttons {
-      gap: 0.5rem;
-    }
-    .btn-back {
-      background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
-      border: none;
-      color: white;
-    }
-    .btn-back:hover {
-      background: linear-gradient(135deg, #5a6268 0%, #343a40 100%);
-      color: white;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
   </style>
 {% endblock %}

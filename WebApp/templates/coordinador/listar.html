@@ -10,32 +10,8 @@
 {% endblock %}
 
 {% block head_extra %}
-  <style>
-    .card-header {
-      background-color: var(--bs-dark);
-      color: white;
-    }
-
-    .table-actions a, .table-actions button {
-      margin: 0 2px;
-    }
-
-    .btn-sm {
-      font-size: 0.8rem;
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: 3rem 1rem;
-      color: #6c757d;
-    }
-
-    .empty-state i {
-      font-size: 4rem;
-      margin-bottom: 1rem;
-      opacity: 0.5;
-    }
-  </style>
+  <link rel="stylesheet" href="{% static 'css/coordinador/colors.css' %}">
+  <link rel="stylesheet" href="{% static 'css/listar.css' %}">
 {% endblock %}
 
 {% block contenido %}
