@@ -71,11 +71,11 @@
       z-index: 2;
     }
     /* Dropdown menu accent */
-    .dropdown-menu {
+    #main-content .dropdown-menu {
       border-color: #17a2b8;
       box-shadow: 0 0 10px rgba(23, 162, 184, 0.3);
     }
-    .dropdown-item:hover, .dropdown-item:focus {
+    #main-content .dropdown-item:hover, #main-content .dropdown-item:focus {
       background-color: rgba(23, 162, 184, 0.15);
       color: #117a8b;
     }

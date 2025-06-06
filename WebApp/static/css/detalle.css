@@ -1,0 +1,96 @@
+.card-header {
+    background-color: var(--bs-dark);
+    color: white;
+    border-left: 5px solid var(--card-header-bg);
+}
+.detail-row {
+    padding: 1rem 0;
+    border-bottom: 1px solid #e9ecef;
+}
+.detail-row:last-child {
+    border-bottom: none;
+}
+.detail-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(var(--card-header-bg-rgb), 0.4);
+    display: inline-block;
+    padding-bottom: 2px;
+}
+.detail-value {
+    font-size: 1.1rem;
+    color: #212529;
+}
+.action-buttons {
+    gap: 0.5rem;
+}
+.bi {
+    color: var(--card-header-bg) !important;
+}
+.btn-back {
+    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    border: none;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+.btn-back::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background:rgba(var(--card-header-bg-rgb), 0.3);
+    transform: skewX(-25deg);
+    transition: left 0.5s ease;
+    z-index: 1;
+}
+.btn-back:hover::after {
+    left: 125%;
+}
+.btn-back:hover {
+    background: linear-gradient(135deg, #5a6268 0%, #343a40 100%);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(var(--card-header-bg-rgb), 0.4);
+    z-index: 2;
+}
+/* Dropdown menu accent */
+#main-content .dropdown-menu {
+    border-color: var(--card-header-bg);
+    box-shadow: 0 0 10px rgba(var(--card-header-bg-rgb), 0.3);
+}
+#main-content .dropdown-item:hover, #main-content .dropdown-item:focus {
+    background-color: rgba(var(--card-header-bg-rgb), 0.15);
+    color: var(--card-header-bg-dark);
+}
+/* Breadcrumb accent */
+.breadcrumb a {
+    color: var(--card-header-bg);
+    transition: color 0.3s ease;
+}
+.breadcrumb a:hover {
+    color: var(--card-header-bg-dark);
+    text-decoration: underline;
+}
+/* Small helper buttons on the info card */
+.card.bg-light .btn-outline-primary {
+    border-color: var(--card-header-bg);
+    color: var(--card-header-bg);
+}
+.card.bg-light .btn-outline-primary:hover {
+    background-color: rgba(var(--card-header-bg-rgb), 0.1);
+    color: var(--card-header-bg-dark);
+    border-color: var(--card-header-bg-dark);
+}
+.card.bg-light .btn-outline-success {
+    border-color: var(--card-header-bg);
+    color: var(--card-header-bg);
+}
+.card.bg-light .btn-outline-success:hover {
+    background-color: rgba(var(--card-header-bg-rgb), 0.15);
+    color: var(--card-header-bg-dark);
+    border-color: var(--card-header-bg-dark);
+}

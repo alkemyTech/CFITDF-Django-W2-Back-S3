@@ -10,36 +10,14 @@
 {% endblock %}
 
 {% block head_extra %}
+  <link rel="stylesheet" href="{% static 'css/cliente/colors.css' %}">
+  <link rel="stylesheet" href="{% static 'css/listar.css' %}">
   <style>
-    .card-header {
-      background-color: var(--bs-dark);
-      color: white;
-    }
-    .table-actions a {
-      margin: 0 2px;
-    }
-    .btn-sm {
-      font-size: 0.8rem;
-    }
-    .price-badge {
-      font-weight: bold;
-      color: #28a745;
-    }
     .cliente-apellido {
       max-width: 300px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-    }
-    .empty-state {
-      text-align: center;
-      padding: 3rem 1rem;
-      color: #6c757d;
-    }
-    .empty-state i {
-      font-size: 4rem;
-      margin-bottom: 1rem;
-      opacity: 0.5;
     }
   </style>
 {% endblock %}

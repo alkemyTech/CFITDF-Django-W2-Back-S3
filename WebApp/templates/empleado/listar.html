@@ -10,30 +10,11 @@
 {% endblock %}
 
 {% block head_extra %}
+  <link rel="stylesheet" href="{% static 'css/empleado/colors.css' %}">
+  <link rel="stylesheet" href="{% static 'css/listar.css' %}">
   <style>
-    .card-header {
-      background-color: var(--bs-dark);
-      color: white;
-    }
-
-    .table-actions a {
-      margin: 0 2px;
-    }
-
-    .btn-sm {
-      font-size: 0.8rem;
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: 3rem 1rem;
-      color: #6c757d;
-    }
-
-    .empty-state i {
-      font-size: 4rem;
-      margin-bottom: 1rem;
-      opacity: 0.5;
+    .btn.btn-outline-light.btn-sm:not(:hover) {
+      background-color: #e9af00;
     }
   </style>
 {% endblock %}

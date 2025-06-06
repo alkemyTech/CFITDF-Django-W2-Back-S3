@@ -1,0 +1,23 @@
+.card-header {
+    background-color: var(--card-header-bg);
+    color: white;
+}
+.card-footer.bg-light {
+    border-top: 2px solid var(--card-header-bg);
+}
+.table-actions a {
+    margin: 0 2px;
+}
+.btn-sm {
+    font-size: 0.8rem;
+}
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #6c757d;
+}
+.empty-state i {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
