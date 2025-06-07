@@ -26,3 +26,14 @@ class ReservaServicioForm(forms.ModelForm):
             self.fields['coordinador_asignado'].queryset = Coordinador.objects.filter(activo=True)
         if self.instance and self.instance.pk:
             self.fields['fecha_solicitada_reserva'].initial = self.instance.fecha_solicitada_reserva.strftime('%Y-%m-%dT%H:%M')
+
+class CoordinadorForm(forms.ModelForm):
+    class Meta:
+        model = Coordinador
+        fields = '__all__'
+        widgets = {
+            'fecha_alta': DateTimeInput(
+                attrs={'type': 'datetime-local'},
+                format='%Y-%m-%dT%H:%M'
+            ),
+        }

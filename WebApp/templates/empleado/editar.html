@@ -40,52 +40,5 @@
 {% endblock %}
 
 {% block contenido %}
-<div class="container-fluid mt-4">
-  <div class="row justify-content-center">
-    <div class="col-12 col-lg-8 col-xl-6">
-      <div class="card shadow-sm">
-        <div class="card-header">
-          <h3 class="mb-0">
-            <i class="bi bi-pencil-square me-2"></i> {{ titulo_vista }}
-          </h3>
-        </div>
-        
-        <div class="card-body">
-          <form method="post">
-            {% csrf_token %}
-            {% for field in form %}
-              <div class="mb-3">
-                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-                {{ field }}
-                {% if field.help_text %}
-                  <div class="form-text text-muted">{{ field.help_text }}</div>
-                {% endif %}
-                {% for error in field.errors %}
-                  <div class="invalid-feedback d-block">{{ error }}</div>
-                {% endfor %}
-              </div>
-            {% endfor %}
-
-            {% if form.non_field_errors %}
-              <div class="alert alert-danger" role="alert">
-                {% for error in form.non_field_errors %}
-                  {{ error }}
-                {% endfor %}
-              </div>
-            {% endif %}
-
-            <div class="d-flex justify-content-between align-items-center mt-4">
-              <a href="javascript:history.back()" class="btn btn-back">
-                <i class="bi bi-arrow-left me-2"></i>Volver
-              </a>
-              <button type="submit" class="btn btn-primary">
-                <i class="bi bi-check-circle me-2"></i>Guardar
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+  {% include 'editar.html' %}
 {% endblock %}

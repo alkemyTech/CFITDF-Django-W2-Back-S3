@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, render
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Servicio, Coordinador, ReservaServicio, Cliente, Empleado
-from .forms import ReservaServicioForm 
+from .forms import ReservaServicioForm, CoordinadorForm
 
 
 def home(request):
@@ -15,7 +15,7 @@ class ServicioCreateView(CreateView):
     model = Servicio
     template_name = 'servicios/editar.html'
     fields = '__all__'
-    success_url = reverse_lazy('WebApp:servicio_listar')
+    success_url = reverse_lazy('WebApp:servicio_crear')
 
     # Esto permite personalizar el contexto que se pasa a la plantilla.
     # De esta manera, editar.html puede ser usado tanto para crear como
@@ -24,6 +24,9 @@ class ServicioCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         context["titulo_vista"] = "Crear Servicio"
         return context
+    
+    def form_valid(self, form):
+        return super().form_valid(form)
     
 
 class ServicioDetailView(DetailView):
@@ -62,6 +65,9 @@ class ServicioUpdateView(UpdateView):
         context["titulo_vista"] = "Modificar Servicio"
         return context
     
+    def form_valid(self, form):
+        return super().form_valid(form)
+    
 # Si alguien conoce una forma más elegante de hacer esto, por favor
 # háganmelo saber
 def servicio_cambiar_estado(request, pk):
@@ -81,6 +87,9 @@ class ClienteCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         context["titulo_vista"] = "Crear Cliente"
         return context
+    
+    def form_valid(self, form):
+        return super().form_valid(form)
 
 class ClienteDetailView(DetailView):
     model = Cliente
@@ -114,6 +123,10 @@ class ClienteUpdateView(UpdateView):
         context = super().get_context_data(**kwargs)
         context["titulo_vista"] = "Modificar Cliente"
         return context
+    
+    def form_valid(self, form):
+        return super().form_valid(form)
+    
 
 def cliente_cambiar_estado(request, pk):
     cliente = get_object_or_404(Cliente, id=pk)
@@ -125,13 +138,17 @@ def cliente_cambiar_estado(request, pk):
 class CoordinadorCreateView(CreateView):
     model = Coordinador
     template_name = 'coordinador/editar.html'
-    fields = '__all__'
+    form_class = CoordinadorForm
     success_url = reverse_lazy('WebApp:coordinador_crear')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titulo_vista"] = "Crear Coordinador"
         return context
+    
+    def form_valid(self, form):
+        return super().form_valid(form)
+    
     
 class CoordinadorDetailView(DetailView):
     model = Coordinador
@@ -159,13 +176,17 @@ class CoordinadorListView(ListView):
 class CoordinadorUpdateView(UpdateView):
     model = Coordinador
     template_name = 'coordinador/editar.html'
-    fields = '__all__'
+    form_class = CoordinadorForm
     success_url = reverse_lazy('WebApp:coordinador_listar')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titulo_vista"] = "Modificar Coordinador"
         return context
+    
+    def form_valid(self, form):
+        return super().form_valid(form)
+    
 
 def coordinador_cambiar_estado(request, pk):
     coordinador = get_object_or_404(Coordinador, id=pk)
@@ -185,6 +206,9 @@ class ReservaServicioCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         context["titulo_vista"] = "Crear Reserva"
         return context
+    
+    def form_valid(self, form):
+        return super().form_valid(form)
     
 
 class ReservaServicioDetailView(DetailView):
@@ -218,6 +242,9 @@ class ReservaServicioUpdateView(UpdateView):
         context["titulo_vista"] = "Modificar Reserva"
         return context
     
+    def form_valid(self, form):
+        return super().form_valid(form)
+    
 
 class ReservaServicioDeleteView(DeleteView):
     model = ReservaServicio
@@ -238,6 +265,9 @@ class EmpleadoCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         context["titulo_vista"] = "Crear Empleado"
         return context
+    
+    def form_valid(self, form):
+        return super().form_valid(form)
     
 
 class EmpleadoDetailView(DetailView):
@@ -276,6 +306,10 @@ class EmpleadoUpdateView(UpdateView):
         context = super().get_context_data(**kwargs)
         context["titulo_vista"] = "Modificar Empleado"
         return context
+    
+    def form_valid(self, form):
+        return super().form_valid(form)
+    
     
 def empleado_cambiar_estado(request, pk):
     empleado = get_object_or_404(Empleado, id=pk)
