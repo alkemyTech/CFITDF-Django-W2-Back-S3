@@ -52,40 +52,48 @@
               {{ reserva_servicio.fecha_solicitada_reserva}}
             </div>
           </div>
-           <!-- Servicio -->
+          <!-- Servicio -->
           <div class="detail-row">
             <div class="detail-label">
               <i class="bi bi-gear-fill me-2" style="color:#17a2b8"></i>Servicio
             </div>
             <div class="detail-value">
-              {{ reserva_servicio.servicio_solicitado.nombre}}
+              <a href="{% url 'WebApp:servicio_detalle' reserva_servicio.servicio_solicitado.id %}" class="link-sin-estilo">
+                {{ reserva_servicio.servicio_solicitado }}
+              </a>
             </div>
           </div>
-           <!-- Cliente -->
+          <!-- Cliente -->
           <div class="detail-row">
             <div class="detail-label">
               <i class="bi bi-people-fill me-2" style="color:#17a2b8"></i>Cliente
             </div>
             <div class="detail-value">
-              {{ reserva_servicio.cliente.nombre}}
+              <a href="{% url 'WebApp:cliente_detalle' reserva_servicio.cliente.id %}" class="link-sin-estilo">
+                {{ reserva_servicio.cliente }}
+              </a>
             </div>
           </div>
-           <!-- Empleado -->
+          <!-- Empleado -->
           <div class="detail-row">
             <div class="detail-label">
               <i class="bi bi-person-workspace me-2" style="color:#17a2b8"></i>Empleado
             </div>
             <div class="detail-value">
-              {{ reserva_servicio.empleado_encargado.nombre}}
+              <a href="{% url 'WebApp:empleado_detalle' reserva_servicio.empleado_encargado.id %}" class="link-sin-estilo">
+                {{ reserva_servicio.empleado_encargado }}
+              </a>
             </div>
           </div>
-           <!-- Coordinador -->
+          <!-- Coordinador -->
           <div class="detail-row">
             <div class="detail-label">
               <i class="bi bi-person-lines-fill me-2" style="color:#17a2b8"></i>Coordinador
             </div>
             <div class="detail-value">
-              {{ reserva_servicio.coordinador_asignado.nombre}}
+              <a href="{% url 'WebApp:coordinador_detalle' reserva_servicio.coordinador_asignado.id %}" class="link-sin-estilo">
+                {{ reserva_servicio.coordinador_asignado }}
+              </a>
             </div>
           </div>
         </div>  

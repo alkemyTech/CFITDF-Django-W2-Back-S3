@@ -44,40 +44,48 @@
                 <tbody>
                   {% for reserva_servicio in listado_reservas_servicios %}
                   <tr>
-                    <td class="text-center text-muted fw-bold">{{reserva_servicio.id}}</td>
+                    <td class="text-center text-muted fw-bold">{{ reserva_servicio.id }}</td>
                     <td>
-                      <div class="fw-semibold">{{reserva_servicio.fecha_solicitada_reserva}}</div>
+                      <div class="fw-semibold">{{ reserva_servicio.fecha_solicitada_reserva }}</div>
                     </td>
                     <td>
-                      <div class="fw-semibold">{{reserva_servicio.servicio_solicitado.nombre}}</div>
+                      <a href="{% url 'WebApp:servicio_detalle' reserva_servicio.servicio_solicitado.id %}" class="text-decoration-none fw-semibold link-sin-estilo">
+                        {{ reserva_servicio.servicio_solicitado.nombre }}
+                      </a>
                     </td>
                     <td>
-                      <div class="fw-semibold">{{reserva_servicio.cliente.nombre}}</div>
+                      <a href="{% url 'WebApp:cliente_detalle' reserva_servicio.cliente.id %}" class="text-decoration-none fw-semibold link-sin-estilo">
+                        {{ reserva_servicio.cliente }}
+                      </a>
                     </td>
                     <td>
-                      <div class="fw-semibold">{{reserva_servicio.empleado_encargado.nombre}}</div>
+                      <a href="{% url 'WebApp:empleado_detalle' reserva_servicio.empleado_encargado.id %}" class="text-decoration-none fw-semibold link-sin-estilo">
+                        {{ reserva_servicio.empleado_encargado }}
+                      </a>
                     </td>
                     <td>
-                      <div class="fw-semibold">{{reserva_servicio.coordinador_asignado.nombre}}</div>
+                      <a href="{% url 'WebApp:coordinador_detalle' reserva_servicio.coordinador_asignado.id %}" class="text-decoration-none fw-semibold link-sin-estilo">
+                        {{ reserva_servicio.coordinador_asignado }}
+                      </a>
                     </td>
                     <td class="text-center table-actions">
                       <div class="btn-group btn-group-sm" role="group">
                         <a href="{% url 'WebApp:reserva_servicio_detalle' reserva_servicio.id %}" 
-                           class="btn btn-outline-primary" 
-                           title="Ver detalles"
-                           aria-label="Ver detalles de la reserva">
+                          class="btn btn-outline-primary" 
+                          title="Ver detalles"
+                          aria-label="Ver detalles de la reserva">
                           <i class="bi bi-eye"></i>
                         </a>
                         <a href="{% url 'WebApp:reserva_servicio_editar' reserva_servicio.id %}" 
-                           class="btn btn-outline-secondary" 
-                           title="Editar"
-                           aria-label="Editar reserva">
+                          class="btn btn-outline-secondary" 
+                          title="Editar"
+                          aria-label="Editar reserva">
                           <i class="bi bi-pencil"></i>
                         </a>
                         <a href="{% url 'WebApp:reserva_servicio_borrar' reserva_servicio.id %}" 
-                           class="btn btn-outline-danger" 
-                           title="Eliminar"
-                           aria-label="Eliminar reserva">
+                          class="btn btn-outline-danger" 
+                          title="Eliminar"
+                          aria-label="Eliminar reserva">
                           <i class="bi bi-trash"></i>
                         </a>
                       </div>
