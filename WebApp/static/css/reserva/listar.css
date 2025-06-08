@@ -85,3 +85,13 @@
     .card-footer.bg-light {
       border-top: 2px solid var(--main-color-light);
     }
+
+    .link-sin-estilo {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .link-sin-estilo:hover {
+      text-decoration: underline; /* Opcional: si quieres que se subraye al pasar el mouse */
+      color: var(--main-color-dark); /* o el color que quieras */
+    }
