@@ -1,5 +1,5 @@
 :root {
-    --card-header-bg: #f7b900;
-    --card-header-bg-rgb: 255, 193, 7;
-    --card-header-bg-dark: #ebb000;
+    --main-color: #f7b900;
+    --main-color-rgb: 255, 193, 7;
+    --main-color-dark: #ebb000;
 }

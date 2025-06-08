@@ -1,20 +1,24 @@
 .card-header {
     background-color: var(--bs-dark);
     color: white;
-    border-left: 5px solid var(--card-header-bg);
+    border-left: 5px solid var(--main-color);
 }
 .detail-row {
     padding: 1rem 0;
     border-bottom: 1px solid #e9ecef;
+    transition: background-color 0.3s ease;
 }
 .detail-row:last-child {
     border-bottom: none;
+}
+.detail-row:hover {
+    background-color: rgba(var(--main-color-rgb), 0.1); /* detalle al pasar mouse */
 }
 .detail-label {
     font-weight: 600;
     color: #495057;
     margin-bottom: 0.5rem;
-    border-bottom: 2px solid rgba(var(--card-header-bg-rgb), 0.4);
+    border-bottom: 2px solid rgba(var(--main-color-rgb), 0.4);
     display: inline-block;
     padding-bottom: 2px;
 }
@@ -26,7 +30,7 @@
     gap: 0.5rem;
 }
 .bi {
-    color: var(--card-header-bg) !important;
+    color: var(--main-color) !important;
 }
 .btn-back {
     background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
@@ -42,7 +46,7 @@
     left: -75%;
     width: 50%;
     height: 100%;
-    background:rgba(var(--card-header-bg-rgb), 0.3);
+    background:rgba(var(--main-color-rgb), 0.3);
     transform: skewX(-25deg);
     transition: left 0.5s ease;
     z-index: 1;
@@ -54,43 +58,52 @@
     background: linear-gradient(135deg, #5a6268 0%, #343a40 100%);
     color: white;
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(var(--card-header-bg-rgb), 0.4);
+    box-shadow: 0 4px 8px rgba(var(--main-color-rgb), 0.4);
     z-index: 2;
 }
 /* Dropdown menu accent */
 #main-content .dropdown-menu {
-    border-color: var(--card-header-bg);
-    box-shadow: 0 0 10px rgba(var(--card-header-bg-rgb), 0.3);
+    border-color: var(--main-color);
+    box-shadow: 0 0 10px rgba(var(--main-color-rgb), 0.3);
 }
 #main-content .dropdown-item:hover, #main-content .dropdown-item:focus {
-    background-color: rgba(var(--card-header-bg-rgb), 0.15);
-    color: var(--card-header-bg-dark);
+    background-color: rgba(var(--main-color-rgb), 0.15);
+    color: var(--main-color-dark);
 }
 /* Breadcrumb accent */
 .breadcrumb a {
-    color: var(--card-header-bg);
+    color: var(--main-color);
     transition: color 0.3s ease;
 }
 .breadcrumb a:hover {
-    color: var(--card-header-bg-dark);
+    color: var(--main-color-dark);
     text-decoration: underline;
 }
 /* Small helper buttons on the info card */
 .card.bg-light .btn-outline-primary {
-    border-color: var(--card-header-bg);
-    color: var(--card-header-bg);
+    border-color: var(--main-color);
+    color: var(--main-color);
 }
 .card.bg-light .btn-outline-primary:hover {
-    background-color: rgba(var(--card-header-bg-rgb), 0.1);
-    color: var(--card-header-bg-dark);
-    border-color: var(--card-header-bg-dark);
+    background-color: rgba(var(--main-color-rgb), 0.1);
+    color: var(--main-color-dark);
+    border-color: var(--main-color-dark);
 }
 .card.bg-light .btn-outline-success {
-    border-color: var(--card-header-bg);
-    color: var(--card-header-bg);
+    border-color: var(--main-color);
+    color: var(--main-color);
 }
 .card.bg-light .btn-outline-success:hover {
-    background-color: rgba(var(--card-header-bg-rgb), 0.15);
-    color: var(--card-header-bg-dark);
-    border-color: var(--card-header-bg-dark);
+    background-color: rgba(var(--main-color-rgb), 0.15);
+    color: var(--main-color-dark);
+    border-color: var(--main-color-dark);
+}
+.link-sin-estilo {
+    color: inherit;
+    text-decoration: none;
+}
+
+.link-sin-estilo:hover {
+    text-decoration: underline; /* Opcional: si quieres que se subraye al pasar el mouse */
+    color: var(--main-color-dark); /* o el color que quieras */
 }
