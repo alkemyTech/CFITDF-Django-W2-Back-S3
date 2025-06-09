@@ -82,24 +82,23 @@
                            aria-label="Editar coordinador {{ coordinador.nombre }}">
                            <i class="bi bi-pencil"></i>
                         </a>
-                        <form action="{% url 'WebApp:coordinador_cambiar_estado' coordinador.id %}" method="post" class="d-inline">
-                          {% csrf_token %}
-                          {% if listando_inactivos %}
-                            <button type="submit" class="btn btn-outline-success"
-                                    title="Restaurar"
-                                    aria-label="Restaurar coordinador {{ coordinador.nombre }}"
-                                    onclick="return confirm('¿Está seguro que desea restaurar este coordinador?')">
-                              <i class="bi bi-arrow-clockwise"></i>
-                            </button>
-                          {% else %}
-                            <button type="submit" class="btn btn-outline-danger"
-                                    title="Desactivar"
-                                    aria-label="Desactivar coordinador {{ coordinador.nombre }}"
-                                    onclick="return confirm('¿Está seguro que desea desactivar este coordinador?')">
-                              <i class="bi bi-trash"></i>
-                            </button>
-                          {% endif %}
-                        </form>
+                        {% if listando_inactivos %}
+                          <a href="{% url 'WebApp:coordinador_cambiar_estado' coordinador.id %}" 
+                             class="btn btn-outline-success" 
+                             title="Restaurar"
+                             aria-label="Restaurar coordinador {{ coordinador.nombre }}"
+                             onclick="return confirm('¿Está seguro que desea restaurar este coordinador?')">
+                            <i class="bi bi-arrow-clockwise"></i>
+                          </a>
+                        {% else %}
+                          <a href="{% url 'WebApp:coordinador_cambiar_estado' coordinador.id %}" 
+                             class="btn btn-outline-danger" 
+                             title="Eliminar"
+                             aria-label="Eliminar coordinador {{ coordinador.nombre }}"
+                             onclick="return confirm('¿Está seguro que desea eliminar este coordinador?')">
+                            <i class="bi bi-trash"></i>
+                          </a>
+                        {% endif %}
                       </div>
                     </td>
                   </tr>

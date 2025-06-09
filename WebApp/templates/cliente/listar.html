@@ -105,25 +105,23 @@
                            aria-label="Editar cliente {{ cliente.nombre }}">
                           <i class="bi bi-pencil"></i>
                         </a>
-
-                        <form action="{% url 'WebApp:cliente_cambiar_estado' cliente.id %}" method="post" class="d-inline">
-                            {% csrf_token %} {# ¡ESTO ES CRÍTICO PARA LAS SOLICITUDES POST EN DJANGO! #}
-                            {% if listando_inactivos %}
-                                <button type="submit" class="btn btn-outline-success" 
-                                        title="Restaurar"
-                                        aria-label="Restaurar cliente {{ cliente.nombre }}"
-                                        onclick="return confirm('¿Está seguro que desea restaurar este cliente?')">
-                                    <i class="bi bi-arrow-clockwise"></i>
-                                </button>
-                            {% else %}
-                                <button type="submit" class="btn btn-outline-danger" 
-                                        title="Desactivar" {# Cambié el texto a "Desactivar" para ser más preciso con el cambio de estado #}
-                                        aria-label="Desactivar cliente {{ cliente.nombre }}"
-                                        onclick="return confirm('¿Está seguro que desea desactivar este cliente?')">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            {% endif %}
-                        </form>
+                        {% if listando_inactivos %}
+                          <a href="{% url 'WebApp:cliente_cambiar_estado' cliente.id %}" 
+                             class="btn btn-outline-success" 
+                             title="Restaurar"
+                             aria-label="Restaurar cliente {{ cliente.nombre }}"
+                             onclick="return confirm('¿Está seguro que desea restaurar este cliente?')">
+                            <i class="bi bi-arrow-clockwise"></i>
+                          </a>
+                        {% else %}
+                          <a href="{% url 'WebApp:cliente_cambiar_estado' cliente.id %}" 
+                             class="btn btn-outline-danger" 
+                             title="Eliminar"
+                             aria-label="Eliminar cliente {{ cliente.nombre }}"
+                             onclick="return confirm('¿Está seguro que desea eliminar este cliente?')">
+                            <i class="bi bi-trash"></i>
+                          </a>
+                        {% endif %}
                       </div>
                     </td>
                   </tr>
