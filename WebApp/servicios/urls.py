@@ -4,7 +4,7 @@ from . import views
 app_name = 'WebApp'
 
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('', views.calendario, name='calendario'),
     path('home/', views.home, name='home'),
     # Servicios
     path('servicios/crear/', views.ServicioCreateView.as_view(), name='servicio_crear'),

@@ -3,11 +3,10 @@
 
 {% block titulo %}Calendario de Reservas{% endblock %}
 {% block head_extra %}
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'css/calendario.css' %}">
 {% endblock %}
 
-{% block contenido %}
+{% block contenido %}   
 <div class="container mt-4">
   <h2>Calendario de Reservas</h2>
   <div id="calendario"></div>
@@ -20,7 +19,7 @@
     <script src="https://unpkg.com/tippy.js@6"></script>
     <!-- FullCalendar JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.8/index.global.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.8/locales/es.global.min.js"></script>    <script>
+    <script>
     
     document.addEventListener('DOMContentLoaded', function () {
         const calendarEl = document.getElementById('calendario');
@@ -74,7 +73,7 @@
                             dayCell.style.backgroundColor = ''; // Limpiar si hay eventos
                         }
                     });
-                }, 50);
+                }, 500);
             }
         });
         calendar.render();
