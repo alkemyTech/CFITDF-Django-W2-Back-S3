@@ -83,19 +83,15 @@
                            <i class="bi bi-pencil"></i>
                         </a>
                         {% if listando_inactivos %}
-                          <a href="{% url 'WebApp:coordinador_cambiar_estado' coordinador.id %}" 
-                             class="btn btn-outline-success" 
-                             title="Restaurar"
-                             aria-label="Restaurar coordinador {{ coordinador.nombre }}"
-                             onclick="return confirm('¿Está seguro que desea restaurar este coordinador?')">
+                          <a href="#" class="btn btn-outline-success" title="Restaurar"
+                            aria-label="Restaurar coordinador {{ coordinador.nombre }}"
+                            onclick="openActionModal('{% url 'WebApp:coordinador_cambiar_estado' coordinador.id %}', 'este coordinador', 'restore')">
                             <i class="bi bi-arrow-clockwise"></i>
                           </a>
                         {% else %}
-                          <a href="{% url 'WebApp:coordinador_cambiar_estado' coordinador.id %}" 
-                             class="btn btn-outline-danger" 
-                             title="Eliminar"
-                             aria-label="Eliminar coordinador {{ coordinador.nombre }}"
-                             onclick="return confirm('¿Está seguro que desea eliminar este coordinador?')">
+                          <a href="#" class="btn btn-outline-danger" title="Eliminar"
+                            aria-label="Eliminar coordinador {{ coordinador.nombre }}"
+                            onclick="openActionModal('{% url 'WebApp:coordinador_cambiar_estado' coordinador.id %}', 'este coordinador', 'delete')">
                             <i class="bi bi-trash"></i>
                           </a>
                         {% endif %}
@@ -157,4 +153,6 @@
     </div>
   </div>
 </div>
+{% include 'modal_confirmacion.html' %}
+<script src="{% static 'js/modal.js' %}" defer></script>
 {% endblock %}
